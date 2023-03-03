@@ -1,5 +1,5 @@
 import styles from './choose-location.module.css';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 /* eslint-disable-next-line */
 export interface ChooseLocationProps {}
@@ -27,14 +27,13 @@ export function ChooseLocation(props: ChooseLocationProps) {
 
   return (
     <div className={styles['container']}>
-      <div className="card">
-        <div className="field">
-          <label htmlFor="firstname1">
-            <i className="pi pi-compass" /> Choose Location:{' '}
-          </label>
-          <input ref={inputRef} />
-        </div>
+      <div className="field">
+        <label htmlFor="firstname1">
+          <i className="pi pi-compass" /> Choose Location:{' '}
+        </label>
+        <input ref={inputRef} />
       </div>
+
     </div>
   );
 }

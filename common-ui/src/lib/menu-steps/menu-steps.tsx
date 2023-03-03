@@ -6,6 +6,8 @@ import { MenuItem } from 'primereact/menuitem';
 import { Card } from 'primereact/card';
 import ChooseLocation from '../choose-location/choose-location';
 
+import { Button } from 'primereact/button';
+
 /* eslint-disable-next-line */
 export interface MenuStepsProps {}
 
@@ -15,6 +17,7 @@ export function MenuSteps(props: MenuStepsProps) {
   const items: MenuItem = [
     {
       label: 'Location',
+      disabled: false,
       // command: (event) => {
       //   toast?.current?.show({
       //     severity: 'info',
@@ -25,12 +28,15 @@ export function MenuSteps(props: MenuStepsProps) {
     },
     {
       label: 'Seat',
+      disabled: activeIndex < 1,
     },
     {
       label: 'Payment',
+      disabled: activeIndex < 2,
     },
     {
       label: 'Confirmation',
+      disabled: activeIndex < 3,
     },
   ];
   return (
@@ -59,6 +65,19 @@ export function MenuSteps(props: MenuStepsProps) {
               return <div>NULL</div>;
           }
         })()}
+
+        <div className="formgrid grid">
+          <div className="field col">
+            <div className="card flex justify-content-center">
+              {activeIndex > 0 && <Button label="<< Previous" />}
+            </div>
+          </div>
+          <div className="field col">
+            <div className="card flex justify-content-center">
+              {activeIndex < 3 && <Button label="Next >>" />}
+            </div>
+          </div>
+        </div>
       </Card>
     </div>
   );
