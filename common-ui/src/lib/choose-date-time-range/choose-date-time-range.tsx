@@ -9,13 +9,13 @@ export interface ChooseDateTimeRangeProps {}
 
 export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
   const now = new Date();
-  const [hour, setHour] = useState('01');
-  const [minute, setMinute] = useState('01');
-  const [month, setMonth] = useState(
+  const [hour] = useState('00');
+  const [minute] = useState('00');
+  const [month] = useState(
     String(now.getMonth() + 1).padStart(2, '0')
   );
-  const [date, setDate] = useState(String(now.getDate()).padStart(2, '0'));
-  const [year, setYear] = useState(String(now.getFullYear()));
+  const [date] = useState(String(now.getDate()).padStart(2, '0'));
+  const [year] = useState(String(now.getFullYear()));
   return (
     <div className={styles['container']}>
       <div className="field">
@@ -37,7 +37,7 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
           ]} // ['YYYY-MM-DD', 'YYYY-MM-DD']
           initialTimes={[hour + ':' + minute, hour + ':' + minute]} // ['hh:mm', 'hh:mm']
           onConfirm={(res) => console.log(res, 1)}
-          onClose={() => console.log('closed')}
+          // onClose={() => console.log('closed')}
           style={{ width: '400px'}}
         />
       </div>
