@@ -9,14 +9,27 @@ import 'primeflex/primeflex.css';
 
 import { exampleMeteomaticsAPI } from '@fedevela-vntr-case/api';
 import { Banner, MenuSteps } from '@fedevela-vntr-case/common-ui';
+import { useEffect, useState } from 'react';
 
 export function App() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result: any[] = exampleMeteomaticsAPI();
+  // const result: any[] = exampleMeteomaticsAPI();
+  const [latitude, setLatitude] = useState(0.0);
+  const [longitude, setLongitude] = useState(0.0);
+
+  useEffect(() => {
+    console.log(`latitude : ${latitude}`);
+  }, [latitude]);
+  useEffect(() => {
+    console.log(`longitude : ${longitude}`);
+  }, [longitude]);
 
   return (
     <>
-      <MenuSteps></MenuSteps>
+      <MenuSteps
+        setLatitude={setLatitude}
+        setLongitude={setLongitude}
+      ></MenuSteps>
       {/* <Banner text="Hello World!"></Banner>
 
       <ul>

@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './menu-steps.module.css';
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
@@ -5,11 +6,15 @@ import { Toast } from 'primereact/toast';
 import { MenuItem } from 'primereact/menuitem';
 import { Card } from 'primereact/card';
 import ChooseLocation from '../choose-location/choose-location';
-
 import { Button } from 'primereact/button';
+import { Divider } from 'primereact/divider';
+import { PrimeIcons } from 'primereact/api';
+import ChooseDateTimeRange from '../choose-date-time-range/choose-date-time-range';
 
-/* eslint-disable-next-line */
-export interface MenuStepsProps {}
+export interface MenuStepsProps {
+  setLatitude: (latitude: number) => void;
+  setLongitude: (longitude: number) => void;
+}
 
 export function MenuSteps(props: MenuStepsProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -17,10 +22,12 @@ export function MenuSteps(props: MenuStepsProps) {
   const items: MenuItem = [
     {
       label: 'Location',
+      icon: PrimeIcons.COMPASS,
       disabled: false,
     },
     {
-      label: 'Seat',
+      label: 'Date and Time',
+      icon: PrimeIcons.CALENDAR,
       disabled: activeIndex < 1,
     },
     {
@@ -41,13 +48,19 @@ export function MenuSteps(props: MenuStepsProps) {
         onSelect={(e) => setActiveIndex(e.index)}
         readOnly={false}
       />
+      <Divider></Divider>
       <Card>
         {(() => {
           switch (activeIndex) {
             case 0:
-              return <ChooseLocation></ChooseLocation>;
+              return (
+                <ChooseLocation
+                  setLatitude={props.setLatitude}
+                  setLongitude={props.setLongitude}
+                ></ChooseLocation>
+              );
             case 1:
-              return <div>one</div>;
+              return <ChooseDateTimeRange></ChooseDateTimeRange>;
             case 2:
               return <div>two</div>;
             case 3:
@@ -62,12 +75,22 @@ export function MenuSteps(props: MenuStepsProps) {
         <div className="formgrid grid">
           <div className="field col">
             <div className="card flex justify-content-center">
-              {activeIndex > 0 && <Button label="<< Previous" onClick={()=>setActiveIndex(activeIndex-1)}  />}
+              {activeIndex > 0 && (
+                <Button
+                  label="<< Previous"
+                  onClick={() => setActiveIndex(activeIndex - 1)}
+                />
+              )}
             </div>
           </div>
           <div className="field col">
             <div className="card flex justify-content-center">
-              {activeIndex < 3 && <Button label="Next >>" onClick={()=>setActiveIndex(activeIndex+1)}  />}
+              {activeIndex < 3 && (
+                <Button
+                  label="Next >>"
+                  onClick={() => setActiveIndex(activeIndex + 1)}
+                />
+              )}
             </div>
           </div>
         </div>

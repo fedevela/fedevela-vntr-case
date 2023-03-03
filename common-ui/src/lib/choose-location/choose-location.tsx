@@ -1,8 +1,10 @@
 import styles from './choose-location.module.css';
 import { useRef, useEffect } from 'react';
 
-/* eslint-disable-next-line */
-export interface ChooseLocationProps {}
+export interface ChooseLocationProps {
+  setLatitude: (latitude: number) => void;
+  setLongitude: (longitude: number) => void;
+}
 
 export function ChooseLocation(props: ChooseLocationProps) {
   const autoCompleteRef = useRef(null);
@@ -19,21 +21,19 @@ export function ChooseLocation(props: ChooseLocationProps) {
     );
     autoCompleteRef.current.addListener('place_changed', async function () {
       const place = await autoCompleteRef.current.getPlace();
-      console.log(
-        `(${place.geometry.location.lat()},${place.geometry.location.lng()})`
-      );
+      props.setLatitude(place.geometry.location.lat());
+      props.setLongitude(place.geometry.location.lng());
     });
   }, []);
 
   return (
     <div className={styles['container']}>
       <div className="field">
-        <label htmlFor="firstname1">
-          <i className="pi pi-compass" /> Choose Location:{' '}
+        <label>
+          Choose Location:
         </label>
         <input ref={inputRef} />
       </div>
-
     </div>
   );
 }
