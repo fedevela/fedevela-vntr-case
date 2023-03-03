@@ -1,14 +1,21 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
+import { exampleMeteomaticsAPI } from '@fedevela-vntr-case/api';
+import { Banner } from '@fedevela-vntr-case/common-ui';
+//import styles from './app.module.css';
 
-import NxWelcome from './nx-welcome';
+//import NxWelcome from './nx-welcome';
 
 export function App() {
   return (
     <>
-      <NxWelcome title="fedevela-vntr-case" />
+      <Banner text="Hello World!"></Banner>
 
-      <div />
+      <ul>
+        {exampleMeteomaticsAPI.map( (ema) => (
+          <li key={ema.id}>
+            <strong>{ema.name}</strong> Price: {ema.price}
+          </li>
+        ) )}
+      </ul>
     </>
   );
 }
