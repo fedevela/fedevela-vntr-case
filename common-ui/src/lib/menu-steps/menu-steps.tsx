@@ -18,13 +18,6 @@ export function MenuSteps(props: MenuStepsProps) {
     {
       label: 'Location',
       disabled: false,
-      // command: (event) => {
-      //   toast?.current?.show({
-      //     severity: 'info',
-      //     summary: 'First:',
-      //     detail: 'Please choose a location!',
-      //   });
-      // },
     },
     {
       label: 'Seat',
@@ -69,12 +62,12 @@ export function MenuSteps(props: MenuStepsProps) {
         <div className="formgrid grid">
           <div className="field col">
             <div className="card flex justify-content-center">
-              {activeIndex > 0 && <Button label="<< Previous" />}
+              {activeIndex > 0 && <Button label="<< Previous" onClick={()=>setActiveIndex(activeIndex-1)}  />}
             </div>
           </div>
           <div className="field col">
             <div className="card flex justify-content-center">
-              {activeIndex < 3 && <Button label="Next >>" />}
+              {activeIndex < 3 && <Button label="Next >>" onClick={()=>setActiveIndex(activeIndex+1)}  />}
             </div>
           </div>
         </div>
