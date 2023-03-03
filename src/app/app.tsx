@@ -4,6 +4,8 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import 'primeicons/primeicons.css';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import 'primeflex/primeflex.css';
 
 import { exampleMeteomaticsAPI } from '@fedevela-vntr-case/api';
 import { Banner, MenuSteps } from '@fedevela-vntr-case/common-ui';
@@ -15,7 +17,7 @@ export function App() {
   return (
     <>
       <MenuSteps></MenuSteps>
-      <Banner text="Hello World!"></Banner>
+      {/* <Banner text="Hello World!"></Banner>
 
       <ul>
         {result.map((ema) => (
@@ -23,7 +25,7 @@ export function App() {
             <strong>{ema.name}</strong> Price: {ema.price}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </>
   );
 }

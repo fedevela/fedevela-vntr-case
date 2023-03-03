@@ -19,14 +19,22 @@ export function ChooseLocation(props: ChooseLocationProps) {
     );
     autoCompleteRef.current.addListener('place_changed', async function () {
       const place = await autoCompleteRef.current.getPlace();
-      console.log(`(${place.geometry.location.lat()},${place.geometry.location.lng()})`);
+      console.log(
+        `(${place.geometry.location.lat()},${place.geometry.location.lng()})`
+      );
     });
   }, []);
 
   return (
     <div className={styles['container']}>
-      <label>enter address :</label>
-      <input ref={inputRef} />
+      <div className="card">
+        <div className="field">
+          <label htmlFor="firstname1">
+            <i className="pi pi-compass" /> Choose Location:{' '}
+          </label>
+          <input ref={inputRef} />
+        </div>
+      </div>
     </div>
   );
 }

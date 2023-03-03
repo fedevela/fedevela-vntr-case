@@ -10,3 +10,6 @@
 .pac-item:hover {
   background: #6666;
 }
+input {
+  margin-left: 1em;
+} 
