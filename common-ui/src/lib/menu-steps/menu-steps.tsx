@@ -94,7 +94,10 @@ export function MenuSteps(props: MenuStepsProps) {
             case 2:
               return (
                 <ChooseWeatherParameters
-                setWeatherParameterStringValue={setWeatherParameterStringValue}
+                  setWeatherParameterStringValue={
+                    setWeatherParameterStringValue
+                  }
+                  setShouldDisableNextButton={setShouldDisableNextButton}
                 />
               );
             case 3:

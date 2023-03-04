@@ -7,10 +7,11 @@ import TemperatureParameters from '../parameters-temperature/parameters-temperat
 
 export interface ChooseWeatherParametersProps {
   setWeatherParameterStringValue: (psv: string) => void;
+  setShouldDisableNextButton: (sdnb: boolean) => void;
 }
 
 export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
-  const { setWeatherParameterStringValue } = props;
+  const { setWeatherParameterStringValue, setShouldDisableNextButton } = props;
   const [activeTabIndex, setActiveTabIndex] = useState<number>(-1);
 
   return (
@@ -23,6 +24,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
         <AccordionTab header="Temperature">
           <TemperatureParameters
             setWeatherParameterStringValue={setWeatherParameterStringValue}
+            setShouldDisableNextButton={setShouldDisableNextButton}
           />
         </AccordionTab>
       </Accordion>

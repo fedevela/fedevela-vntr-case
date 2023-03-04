@@ -12,10 +12,11 @@ import ValueParameterUnitTemperature from '../value-parameter-unit-temperature/v
 
 export interface TemperatureParametersProps {
   setWeatherParameterStringValue: (psv: string) => void;
+  setShouldDisableNextButton: (sdnb: boolean) => void;
 }
 
 export function TemperatureParameters(props: TemperatureParametersProps) {
-  const { setWeatherParameterStringValue } = props;
+  const { setWeatherParameterStringValue, setShouldDisableNextButton } = props;
   const [parameterStringValueTemperature, setParameterStringValueTemperature] =
     useState<string>('');
   //"t_min_2m_1h:C"
@@ -32,8 +33,16 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     setParameterStringValueTemperature(
       `t_${measureMMMVP}_${levelMetersVP}_${intervalHDVP}:${unitTemperatureVP}`
     );
+    if (
+      levelMetersVP !== '' &&
+      measureMMMVP !== '' &&
+      intervalHDVP !== '' &&
+      unitTemperatureVP !== ''
+    )
+      setShouldDisableNextButton(false);
   }, [
     setParameterStringValueTemperature,
+    setShouldDisableNextButton,
     levelMetersVP,
     measureMMMVP,
     intervalHDVP,
