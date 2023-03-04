@@ -11,7 +11,7 @@ import {
   exampleMeteomaticsAPI,
   IAddressComponent,
 } from '@fedevela-vntr-case/api';
-import { Banner, MenuSteps } from '@fedevela-vntr-case/common-ui';
+import { MenuSteps } from '@fedevela-vntr-case/common-ui';
 import { useEffect, useState } from 'react';
 
 export function App() {
