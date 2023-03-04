@@ -4,31 +4,27 @@ import { useState } from 'react';
 import { Slider, SliderChangeEvent } from 'primereact/slider';
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 import { Card } from 'primereact/card';
-
-interface IListBoxItem {
-  name: string;
-  code: string;
-}
+import { IListBoxItem, LEVEL_METERS_MAX, LEVEL_METERS_MIN } from '../common-ui';
 
 /* eslint-disable-next-line */
 export interface TemperatureParametersProps {}
 
 export function TemperatureParameters(props: TemperatureParametersProps) {
-  const [valueLevel, setValueLevel] = useState<number>(1000);
-  const [valueMeasure, setValueMeasure] = useState<IListBoxItem | null>(null);
-  const [valueInterval, setValueInterval] = useState<IListBoxItem | null>(null);
-  const [valueUnit, setValueUnit] = useState<IListBoxItem | null>(null);
+  const [valueLevelMeters, setValueLevelMeters] = useState<number>(1000);
+  const [valueMeasureMMM, setValueMeasureMMM] = useState<IListBoxItem | null>(null);
+  const [valueIntervalHD, setValueIntervalHD] = useState<IListBoxItem | null>(null);
+  const [valueUnitTemperature, setValueUnitTemperature] = useState<IListBoxItem | null>(null);
 
-  const availableMeasures: IListBoxItem[] = [
+  const availableMeasuresMMM: IListBoxItem[] = [
     { name: 'Min', code: 'min' },
     { name: 'Mean', code: 'mean' },
     { name: 'Max', code: 'max' },
   ];
-  const availableIntervals: IListBoxItem[] = [
+  const availableIntervalsHD: IListBoxItem[] = [
     { name: 'Hourly', code: '1h' },
     { name: 'Daily', code: '24h' },
   ];
-  const availableUnits: IListBoxItem[] = [
+  const availableUnitsTemperature: IListBoxItem[] = [
     { name: 'C', code: 'C' },
     { name: 'F', code: 'F' },
     { name: 'K', code: 'K' },
@@ -38,23 +34,23 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     <div className={styles['container']}>
       <Card>
         <div className="field">
-          <label>Choose Level (Meters): {valueLevel} m</label>{' '}
+          <label>Level (Meters): {valueLevelMeters} m</label>{' '}
           <Slider
-            value={valueLevel}
-            onChange={(e: SliderChangeEvent) => setValueLevel(e.value)}
-            min={2}
-            max={2000}
+            value={valueLevelMeters}
+            onChange={(e: SliderChangeEvent) => setValueLevelMeters(e.value)}
+            min={LEVEL_METERS_MIN}
+            max={LEVEL_METERS_MAX}
             className="w-full"
           />
         </div>
       </Card>
       <Card>
         <div className="field">
-          <label>Choose Measure: </label>{' '}
+          <label>Measure: </label>{' '}
           <SelectButton
-            value={valueMeasure}
-            onChange={(e: SelectButtonChangeEvent) => setValueMeasure(e.value)}
-            options={availableMeasures}
+            value={valueMeasureMMM}
+            onChange={(e: SelectButtonChangeEvent) => setValueMeasureMMM(e.value)}
+            options={availableMeasuresMMM}
             optionLabel="name"
             optionValue="code"
             className="w-full md:w-14rem"
@@ -63,11 +59,11 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
       </Card>
       <Card>
         <div className="field">
-          <label>Choose Interval: </label>{' '}
+          <label>Interval: </label>{' '}
           <SelectButton
-            value={valueInterval}
-            onChange={(e: SelectButtonChangeEvent) => setValueInterval(e.value)}
-            options={availableIntervals}
+            value={valueIntervalHD}
+            onChange={(e: SelectButtonChangeEvent) => setValueIntervalHD(e.value)}
+            options={availableIntervalsHD}
             optionLabel="name"
             optionValue="code"
             className="w-full md:w-14rem"
@@ -76,11 +72,11 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
       </Card>
       <Card>
         <div className="field">
-          <label>Choose Unit: </label>{' '}
+          <label>Unit: </label>{' '}
           <SelectButton
-            value={valueUnit}
-            onChange={(e: SelectButtonChangeEvent) => setValueUnit(e.value)}
-            options={availableUnits}
+            value={valueUnitTemperature}
+            onChange={(e: SelectButtonChangeEvent) => setValueUnitTemperature(e.value)}
+            options={availableUnitsTemperature}
             optionLabel="name"
             optionValue="code"
             className="w-full md:w-14rem"

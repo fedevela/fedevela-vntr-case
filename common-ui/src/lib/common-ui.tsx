@@ -11,4 +11,11 @@ export function CommonUi(props: CommonUiProps) {
   );
 }
 
-export default CommonUi;
+export interface IListBoxItem {
+  name: string;
+  code: string;
+}
+
+export const LEVEL_METERS_MIN = 2;
+export const LEVEL_METERS_MAX = 20000;
+
