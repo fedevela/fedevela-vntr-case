@@ -1,5 +1,5 @@
 import axios from 'axios';
-import mockMeteomaticsData from "./api.mock.json";
+import mockMeteomaticsData from './api.mock.json';
 
 export interface MeteomaticsAPI {
   id: string;
@@ -12,6 +12,7 @@ export interface IAddressComponent {
 }
 
 export const exampleMeteomaticsAPI = () => mockMeteomaticsData;
+
 export const executeRequestMeteomaticsAPI = () => {
   const instance = axios.create({
     baseURL: 'https://api.meteomatics.com/',

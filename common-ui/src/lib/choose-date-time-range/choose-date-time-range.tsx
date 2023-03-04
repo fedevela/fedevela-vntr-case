@@ -32,7 +32,7 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
   return (
     <div className={styles['container']}>
       <div className="field">
-        <label htmlFor="firstname1">Choose Datetime Range (GMT):</label>
+        <label>Choose Datetime Range (GMT):</label>
         <RangePicker
           locale={`en-us`} // default is en-us
           show={false} // default is false

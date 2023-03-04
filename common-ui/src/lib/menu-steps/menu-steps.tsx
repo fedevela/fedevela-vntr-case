@@ -15,6 +15,7 @@ import ChooseLocation from '../choose-location/choose-location';
 import ChooseDateTimeRange from '../choose-date-time-range/choose-date-time-range';
 
 import { IAddressComponent } from '@fedevela-vntr-case/api';
+import ChooseWeatherParameters from '../choose-weather-parameters/choose-weather-parameters';
 
 export interface MenuStepsProps {
   setStartDate: (sd: Date) => void;
@@ -40,21 +41,21 @@ export function MenuSteps(props: MenuStepsProps) {
     {
       label: 'Location',
       icon: PrimeIcons.COMPASS,
-      disabled: false,
+      // disabled: false,
     },
     {
       label: 'Date and Time',
       icon: PrimeIcons.CALENDAR,
-      disabled: activeIndex < 1,
+      // disabled: activeIndex < 1,
     },
     {
       label: 'Weather Parameters',
       icon: PrimeIcons.BOLT,
-      disabled: activeIndex < 2,
+      // disabled: activeIndex < 2,
     },
     {
       label: 'Confirmation',
-      disabled: activeIndex < 3,
+      // disabled: activeIndex < 3,
     },
   ];
   return (
@@ -88,7 +89,7 @@ export function MenuSteps(props: MenuStepsProps) {
                 ></ChooseDateTimeRange>
               );
             case 2:
-              return <div>two</div>;
+              return <ChooseWeatherParameters></ChooseWeatherParameters>;
             case 3:
               return <div>three</div>;
             case 4:
