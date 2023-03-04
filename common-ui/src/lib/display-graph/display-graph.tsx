@@ -8,11 +8,12 @@ import DisplayGraphTypeHeatmap from '../display-graph-type-heatmap/display-graph
 import DisplayGraphTypeChartJS from '../display-graph-type-chart-js/display-graph-type-chart-js';
 
 export interface DisplayGraphProps {
+  graphPlotType: string;
   meteomaticsAPIDateValues: IMeteomaticsAPIDateValue[];
 }
 
 export function DisplayGraph(props: DisplayGraphProps) {
-  const { meteomaticsAPIDateValues } = props;
+  const { graphPlotType, meteomaticsAPIDateValues } = props;
   const graphDataPoints: IGraphDataPoint[] = meteomaticsAPIDateValues.map(
     (madv) => {
       const dvDate = new Date(madv.date);
@@ -33,8 +34,20 @@ export function DisplayGraph(props: DisplayGraphProps) {
   return (
     <div className={styles['container']}>
       <Card>
-        <DisplayGraphTypeChartJS  graphDataPoints={graphDataPoints} />
-        <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
+        {(() => {
+          switch (graphPlotType) {
+            case 'heatmap':
+              return (
+                <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
+              );
+            case 'line':
+              return (
+                <DisplayGraphTypeChartJS graphDataPoints={graphDataPoints} />
+              );
+            default:
+              return <div>NULL</div>;
+          }
+        })()}
       </Card>
     </div>
   );

@@ -74,7 +74,10 @@ export function App() {
         setGraphPlotType={setGraphPlotType}
       />
       <p className="m-0">{weatherParameterStringValue}</p>
-      <DisplayGraph meteomaticsAPIDateValues={meteomaticsAPIDateValues}/>
+      <DisplayGraph
+        meteomaticsAPIDateValues={meteomaticsAPIDateValues}
+        graphPlotType={graphPlotType}
+      />
     </>
   );
 }
