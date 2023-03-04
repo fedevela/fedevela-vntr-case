@@ -27,6 +27,8 @@ export interface MenuStepsProps {
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
   setWeatherParameterLabel: (git: string) => void;
+  setShouldDisplayGraph: (ssdg: boolean) => void;
+  setShouldRefreshGraph: (ssrg: boolean) => void;
   weatherParameterLabel: string;
   addressComponents: IKeyValueMap[];
   toast: any;
@@ -45,6 +47,8 @@ export function MenuSteps(props: MenuStepsProps) {
     setGraphIntervalType,
     setGraphPlotType,
     setWeatherParameterLabel,
+    setShouldDisplayGraph,
+    setShouldRefreshGraph,
     weatherParameterLabel,
     addressComponents,
     toast,
@@ -175,8 +179,8 @@ export function MenuSteps(props: MenuStepsProps) {
                   iconPos="right"
                   severity="success"
                   onClick={() => {
-                    setActiveIndex(activeIndex + 1);
-                    setShouldDisableNextButton(true);
+                    setShouldDisplayGraph(true);
+                    setShouldRefreshGraph(true);
                   }}
                 />
               )}

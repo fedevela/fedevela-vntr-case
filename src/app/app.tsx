@@ -19,6 +19,8 @@ import { useEffect, useRef, useState } from 'react';
 
 export function App() {
   const toast = useRef(null);
+  const [shouldDisplayGraph, setShouldDisplayGraph] = useState(false);
+  const [shouldRefreshGraph, setShouldRefreshGraph] = useState(false);
   const [weatherParameterLabel, setWeatherParameterLabel] = useState('');
   const [graphIntervalType, setGraphIntervalType] = useState('1h');
   const [graphPlotType, setGraphPlotType] = useState('');
@@ -31,13 +33,22 @@ export function App() {
   const [addressComponents, setAddressComponents] = useState<
     IKeyValueMap[] | []
   >([]);
-
-  const resultMeteomaticsAPIRaw = exampleMeteomaticsAPI();
-  const meteomaticsAPIDateValues: IMeteomaticsAPIDateValue[] =
-    resultMeteomaticsAPIRaw.data[0].coordinates[0].dates;
+  const [meteomaticsAPIDateValues, setMeteomaticsAPIDateValues] = useState<
+    IMeteomaticsAPIDateValue[] | []
+  >([]);
 
   const onChangeAddressComponents = (acs: IKeyValueMap[]) =>
     setAddressComponents([...acs]);
+
+  useEffect(() => {
+    if (shouldRefreshGraph) {
+      const resultMeteomaticsAPIRaw = exampleMeteomaticsAPI();
+      setMeteomaticsAPIDateValues(
+        resultMeteomaticsAPIRaw.data[0].coordinates[0].dates
+      );
+      setShouldRefreshGraph(false);
+    }
+  }, [shouldRefreshGraph, setShouldRefreshGraph]);
 
   // useEffect(() => {
   //   console.log(`latitude : ${latitude}`);
@@ -86,12 +97,18 @@ export function App() {
         setGraphPlotType={setGraphPlotType}
         weatherParameterLabel={weatherParameterLabel}
         setWeatherParameterLabel={setWeatherParameterLabel}
+        setShouldDisplayGraph={setShouldDisplayGraph}
+        setShouldRefreshGraph={setShouldRefreshGraph}
       />
-      <p className="m-0">{weatherParameterStringValue}</p>
-      <DisplayGraph
-        meteomaticsAPIDateValues={meteomaticsAPIDateValues}
-        graphPlotType={graphPlotType}
-      />
+      {shouldDisplayGraph && (
+        <>
+          <p className="m-0">{weatherParameterStringValue}</p>
+          <DisplayGraph
+            meteomaticsAPIDateValues={meteomaticsAPIDateValues}
+            graphPlotType={graphPlotType}
+          />
+        </>
+      )}
     </>
   );
 }
