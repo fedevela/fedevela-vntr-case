@@ -1,3 +1,4 @@
+export * from './lib/choose-graph-plot-type/choose-graph-plot-type';
 export * from './lib/value-parameter-unit-temperature/value-parameter-unit-temperature';
 export * from './lib/value-parameter-interval-hd/value-parameter-interval-hd';
 export * from './lib/value-parameter-measure-mmm/value-parameter-measure-mmm';

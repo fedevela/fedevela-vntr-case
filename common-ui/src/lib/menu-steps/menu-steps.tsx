@@ -16,6 +16,7 @@ import ChooseDateTimeRange from '../choose-date-time-range/choose-date-time-rang
 
 import { IAddressComponent } from '@fedevela-vntr-case/api';
 import ChooseWeatherParameters from '../choose-weather-parameters/choose-weather-parameters';
+import ChooseGraphPlotType from '../choose-graph-plot-type/choose-graph-plot-type';
 
 export interface MenuStepsProps {
   setGraphPlotType: (gpt: string) => void;
@@ -106,9 +107,11 @@ export function MenuSteps(props: MenuStepsProps) {
                 />
               );
             case 3:
-              return <div>three</div>;
-            case 4:
-              return <div>four</div>;
+              return (
+                <ChooseGraphPlotType
+                  setGraphPlotType={setGraphPlotType}
+                />
+              );
             default:
               return <div>NULL</div>;
           }

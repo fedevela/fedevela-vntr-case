@@ -14,6 +14,7 @@ export function CommonUi(props: CommonUiProps) {
 export interface IListBoxItem {
   name: string;
   code: string;
+  icon?: string;
 }
 
 export const LEVEL_METERS_MIN = 2;
