@@ -6,6 +6,10 @@ export interface MeteomaticsAPI {
   price: number;
 }
 
+export interface IAddressComponent {
+  [key: string]: string;
+}
+
 export const exampleMeteomaticsAPI = () => {
   const instance = axios.create({
     baseURL: 'https://api.meteomatics.com/',

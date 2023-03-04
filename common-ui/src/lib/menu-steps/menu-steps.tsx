@@ -10,13 +10,20 @@ import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
 import { PrimeIcons } from 'primereact/api';
 import ChooseDateTimeRange from '../choose-date-time-range/choose-date-time-range';
+import { IAddressComponent } from '@fedevela-vntr-case/api';
 
 export interface MenuStepsProps {
+  setStartDate: (sd: Date) => void;
+  setEndDate: (ed: Date) => void;
+  onChangeAddressComponents: (acs: IAddressComponent[]) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
 }
 
 export function MenuSteps(props: MenuStepsProps) {
+  const { setLatitude, setLongitude, onChangeAddressComponents } = props;
+  const [shouldDisableNextButton, setShouldDisableNextButton] =
+    useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const toast = useRef(null);
   const items: MenuItem = [
@@ -31,7 +38,8 @@ export function MenuSteps(props: MenuStepsProps) {
       disabled: activeIndex < 1,
     },
     {
-      label: 'Payment',
+      label: 'Weather Parameters',
+      icon: PrimeIcons.BOLT,
       disabled: activeIndex < 2,
     },
     {
@@ -55,8 +63,10 @@ export function MenuSteps(props: MenuStepsProps) {
             case 0:
               return (
                 <ChooseLocation
-                  setLatitude={props.setLatitude}
-                  setLongitude={props.setLongitude}
+                  setLatitude={setLatitude}
+                  setLongitude={setLongitude}
+                  onChangeAddressComponents={onChangeAddressComponents}
+                  setShouldDisableNextButton={setShouldDisableNextButton}
                 ></ChooseLocation>
               );
             case 1:
@@ -87,6 +97,7 @@ export function MenuSteps(props: MenuStepsProps) {
             <div className="card flex justify-content-center">
               {activeIndex < 3 && (
                 <Button
+                  disabled={shouldDisableNextButton}
                   label="Next >>"
                   onClick={() => setActiveIndex(activeIndex + 1)}
                 />

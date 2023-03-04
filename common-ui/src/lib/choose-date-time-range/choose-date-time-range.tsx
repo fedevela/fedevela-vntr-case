@@ -19,7 +19,7 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
   return (
     <div className={styles['container']}>
       <div className="field">
-        <label htmlFor="firstname1">Choose Datetime Range:</label>
+        <label htmlFor="firstname1">Choose Datetime Range (GMT):</label>
         <RangePicker
           locale={`en-us`} // default is en-us
           show={false} // default is false
@@ -36,7 +36,10 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
             year + '-' + month + '-' + date,
           ]} // ['YYYY-MM-DD', 'YYYY-MM-DD']
           initialTimes={[hour + ':' + minute, hour + ':' + minute]} // ['hh:mm', 'hh:mm']
-          onConfirm={(res) => console.log(res, 1)}
+          onConfirm={(dates:string[]) => {
+            const [dateStartStr, dateEndStr ] = dates;
+            debugger;
+          }}
           // onClose={() => console.log('closed')}
           style={{ width: '400px'}}
         />

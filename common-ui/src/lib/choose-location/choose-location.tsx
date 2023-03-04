@@ -1,13 +1,21 @@
 import styles from './choose-location.module.css';
 import { useRef, useEffect } from 'react';
+import { IAddressComponent } from '@fedevela-vntr-case/api';
 
 export interface ChooseLocationProps {
+  onChangeAddressComponents: (acs: IAddressComponent[]) => void;
+  setShouldDisableNextButton: (sdnb: boolean) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
 }
 
 export function ChooseLocation(props: ChooseLocationProps) {
-  const { setLatitude, setLongitude } = props;
+  const {
+    setLatitude,
+    setLongitude,
+    onChangeAddressComponents,
+    setShouldDisableNextButton,
+  } = props;
   const autoCompleteRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -24,6 +32,16 @@ export function ChooseLocation(props: ChooseLocationProps) {
       const place = await autoCompleteRef.current.getPlace();
       setLatitude(place.geometry.location.lat());
       setLongitude(place.geometry.location.lng());
+      const addressComponents = place.address_components.map(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (ac: { types: any[]; long_name: any }) => {
+          const addressComponent: IAddressComponent = {};
+          addressComponent[`${ac.types[0]}`] = ac.long_name;
+          return addressComponent;
+        }
+      );
+      onChangeAddressComponents(addressComponents);
+      setShouldDisableNextButton(false);
     });
   }, [setLatitude, setLongitude]);
 
