@@ -64,7 +64,7 @@ export function MenuSteps(props: MenuStepsProps) {
     },
     {
       label: 'Graph Type',
-      icon: PrimeIcons.CHART_LINE,
+      icon: PrimeIcons.MAP,
       // disabled: activeIndex < 3,
     },
   ];

@@ -1,11 +1,10 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import 'primereact/resources/primereact.min.css';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import 'primeicons/primeicons.css';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import 'primeflex/primeflex.css';
+
+import { HeatMapGrid } from 'react-grid-heatmap';
 
 import {
   exampleMeteomaticsAPI,
@@ -28,6 +27,16 @@ export function App() {
   const [addressComponents, setAddressComponents] = useState<
     IAddressComponent[] | []
   >([]);
+
+  const xLabels = new Array(24).fill(0).map((_, i) => `${i}`);
+  const yLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+  const data = new Array(yLabels.length)
+    .fill(0)
+    .map(() =>
+      new Array(xLabels.length)
+        .fill(0)
+        .map(() => Math.floor(Math.random() * 50 + 50))
+    );
 
   const onChangeAddressComponents = (acs: IAddressComponent[]) =>
     setAddressComponents([...acs]);
@@ -74,6 +83,40 @@ export function App() {
         setGraphPlotType={setGraphPlotType}
       ></MenuSteps>
       <p className="m-0">{weatherParameterStringValue}</p>
+      <div
+        style={{
+          width: '100%',
+        }}
+      >
+        <HeatMapGrid
+          data={data}
+          xLabels={xLabels}
+          yLabels={yLabels}
+          // Render cell with tooltip
+          cellRender={(x, y, value) => (
+            <div title={`Pos(${x}, ${y}) = ${value}`}>{value}</div>
+          )}
+          xLabelsStyle={(index) => ({
+            color: index % 2 ? 'transparent' : '#777',
+            fontSize: '.8rem',
+          })}
+          yLabelsStyle={() => ({
+            fontSize: '.7rem',
+            textTransform: 'uppercase',
+            color: '#777',
+          })}
+          cellStyle={(_x, _y, ratio) => ({
+            background: `rgb(12, 160, 44, ${ratio})`,
+            fontSize: '.8rem',
+            color: `rgb(0, 0, 0, ${ratio / 2 + 0.4})`,
+          })}
+          cellHeight="2rem"
+          xLabelsPos="top"
+          onClick={(x, y) => alert(`Clicked (${x}, ${y})`)}
+          yLabelsPos="left"
+          square
+        />
+      </div>
     </>
   );
 }
