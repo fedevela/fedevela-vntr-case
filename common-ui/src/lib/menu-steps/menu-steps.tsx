@@ -61,14 +61,14 @@ export function MenuSteps(props: MenuStepsProps) {
   ];
   return (
     <div className={styles['container']}>
-      <Toast ref={toast}></Toast>
+      <Toast ref={toast} />
       <Steps
         model={items}
         activeIndex={activeIndex}
         onSelect={(e) => setActiveIndex(e.index)}
         readOnly={false}
       />
-      <Divider></Divider>
+      <Divider />
       <Card>
         {(() => {
           switch (activeIndex) {
@@ -100,6 +100,7 @@ export function MenuSteps(props: MenuStepsProps) {
           }
         })()}
 
+        <Divider />
         <div className="formgrid grid">
           <div className="field col">
             <div className="card flex justify-content-center">
