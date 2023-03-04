@@ -1,36 +1,36 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './value-parameter-measure-mmm.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
-import { IListBoxItem } from '../common-ui';
+import { IListBoxItem, IValueParameterProps } from '../common-ui';
 
-/* eslint-disable-next-line */
-export interface ValueParameterMeasureMMMProps {}
+export function ValueParameterMeasureMMM(props: IValueParameterProps) {
+  const { setValueParameter } = props;
 
-export function ValueParameterMeasureMMM(props: ValueParameterMeasureMMMProps) {
-  const [valueMeasureMMM, setValueMeasureMMM] = useState<IListBoxItem | null>(
-    null
-  );
+  const [valueMeasureMMM, setValueMeasureMMM] = useState<string>('');
+
   const availableMeasuresMMM: IListBoxItem[] = [
     { name: 'Min', code: 'min' },
     { name: 'Mean', code: 'mean' },
     { name: 'Max', code: 'max' },
   ];
-  
+
+  useEffect(() => {
+    setValueParameter(valueMeasureMMM);
+  }, [valueMeasureMMM, setValueParameter]);
+
   return (
     <div className="field">
-    <label>Measure: </label>
-    <SelectButton
-      value={valueMeasureMMM}
-      onChange={(e: SelectButtonChangeEvent) =>
-        setValueMeasureMMM(e.value)
-      }
-      options={availableMeasuresMMM}
-      optionLabel="name"
-      optionValue="code"
-      className="w-full md:w-14rem"
-    />
-  </div>
+      <label>Measure: </label>
+      <SelectButton
+        value={valueMeasureMMM}
+        onChange={(e: SelectButtonChangeEvent) => setValueMeasureMMM(e.value)}
+        options={availableMeasuresMMM}
+        optionLabel="name"
+        optionValue="code"
+        className="w-full md:w-14rem"
+      />
+    </div>
   );
 }
 

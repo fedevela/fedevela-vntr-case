@@ -21,6 +21,7 @@ export function App() {
   const [endDate, setEndDate] = useState(new Date(0));
   const [latitude, setLatitude] = useState(0.0);
   const [longitude, setLongitude] = useState(0.0);
+  const [parameterStringValue, setParameterStringValue] = useState<string>('');
   const [addressComponents, setAddressComponents] = useState<
     IAddressComponent[] | []
   >([]);
@@ -28,21 +29,21 @@ export function App() {
   const onChangeAddressComponents = (acs: IAddressComponent[]) =>
     setAddressComponents([...acs]);
 
-  useEffect(() => {
-    console.log(`latitude : ${latitude}`);
-  }, [latitude]);
-  useEffect(() => {
-    console.log(`longitude : ${longitude}`);
-  }, [longitude]);
-  useEffect(() => {
-    console.log(`addressComponents : ${JSON.stringify(addressComponents)}`);
-  }, [addressComponents]);
-  useEffect(() => {
-    console.log(`startDate : ${startDate.toUTCString()}`);
-  }, [startDate]);
-  useEffect(() => {
-    console.log(`endDate : ${endDate.toUTCString()}`);
-  }, [endDate]);
+  // useEffect(() => {
+  //   console.log(`latitude : ${latitude}`);
+  // }, [latitude]);
+  // useEffect(() => {
+  //   console.log(`longitude : ${longitude}`);
+  // }, [longitude]);
+  // useEffect(() => {
+  //   console.log(`addressComponents : ${JSON.stringify(addressComponents)}`);
+  // }, [addressComponents]);
+  // useEffect(() => {
+  //   console.log(`startDate : ${startDate.toUTCString()}`);
+  // }, [startDate]);
+  // useEffect(() => {
+  //   console.log(`endDate : ${endDate.toUTCString()}`);
+  // }, [endDate]);
 
   return (
     <>
@@ -52,7 +53,9 @@ export function App() {
         onChangeAddressComponents={onChangeAddressComponents}
         setStartDate={setStartDate}
         setEndDate={setEndDate}
+        setParameterStringValue={setParameterStringValue}
       ></MenuSteps>
+      <p className="m-0">{parameterStringValue}</p>
       {/* <Banner text="Hello World!"></Banner>
 
       <ul>

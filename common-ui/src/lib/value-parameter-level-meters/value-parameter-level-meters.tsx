@@ -1,15 +1,20 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './value-parameter-level-meters.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Slider, SliderChangeEvent } from 'primereact/slider';
-import { LEVEL_METERS_MAX, LEVEL_METERS_MIN } from '../common-ui';
-/* eslint-disable-next-line */
-export interface ValueParameterLevelMetersProps {}
+import { LEVEL_METERS_MAX, LEVEL_METERS_MIN, IValueParameterProps } from '../common-ui';
 
 export function ValueParameterLevelMeters(
-  props: ValueParameterLevelMetersProps
+  props: IValueParameterProps
 ) {
+  const { setValueParameter } = props;
+
   const [valueLevelMeters, setValueLevelMeters] = useState<number>(1000);
+
+  useEffect(() => {
+    setValueParameter(valueLevelMeters.toString());
+  }, [valueLevelMeters, setValueParameter]);
+
   return (
     <div className="field">
       <label>Level (Meters): {valueLevelMeters} m</label>

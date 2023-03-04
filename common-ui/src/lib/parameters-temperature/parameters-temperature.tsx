@@ -1,5 +1,6 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './parameters-temperature.module.css';
+import { useEffect, useState } from 'react';
 
 import { Card } from 'primereact/card';
 import { Divider } from 'primereact/divider';
@@ -9,22 +10,49 @@ import ValueParameterMeasureMMM from '../value-parameter-measure-mmm/value-param
 import ValueParameterIntervalHD from '../value-parameter-interval-hd/value-parameter-interval-hd';
 import ValueParameterUnitTemperature from '../value-parameter-unit-temperature/value-parameter-unit-temperature';
 
-/* eslint-disable-next-line */
-export interface TemperatureParametersProps {}
+export interface TemperatureParametersProps {
+  setParameterStringValue: (psv: string) => void;
+}
 
 export function TemperatureParameters(props: TemperatureParametersProps) {
+  const { setParameterStringValue } = props;
+  const [parameterStringValueTemperature, setParameterStringValueTemperature] =
+    useState<string>('');
+  //"t_min_2m_1h:C"
+  const [levelMetersVP, setLevelMetersVP] = useState<string>('');
+  const [measureMMMVP, setMeasureMMMVP] = useState<string>('');
+  const [intervalHDVP, setIntervalHDVP] = useState<string>('');
+  const [unitTemperatureVP, setUnitTemperatureVP] = useState<string>('');
+
+  useEffect(() => {
+    setParameterStringValue(parameterStringValueTemperature);
+  }, [setParameterStringValue, parameterStringValueTemperature]);
+
+  useEffect(() => {
+    setParameterStringValueTemperature(
+      `t_${measureMMMVP}_${levelMetersVP}_${intervalHDVP}:${unitTemperatureVP}`
+    );
+  }, [
+    setParameterStringValueTemperature,
+    levelMetersVP,
+    measureMMMVP,
+    intervalHDVP,
+    unitTemperatureVP,
+  ]);
+
   return (
     <div className={styles['container']}>
       <Card>
-        <ValueParameterLevelMeters />
+        <ValueParameterLevelMeters setValueParameter={setLevelMetersVP} />
         <Divider />
-        <ValueParameterMeasureMMM />
+        <ValueParameterMeasureMMM setValueParameter={setMeasureMMMVP} />
         <Divider />
-        <ValueParameterIntervalHD />
+        <ValueParameterIntervalHD setValueParameter={setIntervalHDVP} />
         <Divider />
-        <ValueParameterUnitTemperature />
+        <ValueParameterUnitTemperature
+          setValueParameter={setUnitTemperatureVP}
+        />
       </Card>
-      <p className="m-0">"t_min_2m_1h:C"</p>
     </div>
   );
 }

@@ -5,13 +5,13 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
 import TemperatureParameters from '../parameters-temperature/parameters-temperature';
 
-
-/* eslint-disable-next-line */
-export interface ChooseWeatherParametersProps {}
+export interface ChooseWeatherParametersProps {
+  setParameterStringValue: (psv: string) => void;
+}
 
 export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
+  const { setParameterStringValue } = props;
   const [activeTabIndex, setActiveTabIndex] = useState<number>(-1);
-
 
   return (
     <div className={styles['container']}>
@@ -21,7 +21,9 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
         onTabChange={(e) => setActiveTabIndex(e.index)}
       >
         <AccordionTab header="Temperature">
-          <TemperatureParameters></TemperatureParameters>
+          <TemperatureParameters
+            setParameterStringValue={setParameterStringValue}
+          />
         </AccordionTab>
       </Accordion>
     </div>

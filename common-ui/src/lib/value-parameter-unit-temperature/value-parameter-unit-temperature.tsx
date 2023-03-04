@@ -1,38 +1,38 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './value-parameter-unit-temperature.module.css';
-import { useState } from 'react';
-import { IListBoxItem } from '../common-ui';
+import { useEffect, useState } from 'react';
+import { IListBoxItem, IValueParameterProps } from '../common-ui';
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 
-/* eslint-disable-next-line */
-export interface ValueParameterUnitTemperatureProps {}
+export function ValueParameterUnitTemperature(props: IValueParameterProps) {
+  const { setValueParameter } = props;
 
-export function ValueParameterUnitTemperature(
-  props: ValueParameterUnitTemperatureProps
-) {
-  
-  const [valueUnitTemperature, setValueUnitTemperature] =
-    useState<IListBoxItem | null>(null);
+  const [valueUnitTemperature, setValueUnitTemperature] = useState<string>('');
 
   const availableUnitsTemperature: IListBoxItem[] = [
     { name: 'C', code: 'C' },
     { name: 'F', code: 'F' },
     { name: 'K', code: 'K' },
   ];
+
+  useEffect(() => {
+    setValueParameter(valueUnitTemperature);
+  }, [valueUnitTemperature, setValueParameter]);
+
   return (
     <div className="field">
-    <label>Unit: </label>
-    <SelectButton
-      value={valueUnitTemperature}
-      onChange={(e: SelectButtonChangeEvent) =>
-        setValueUnitTemperature(e.value)
-      }
-      options={availableUnitsTemperature}
-      optionLabel="name"
-      optionValue="code"
-      className="w-full md:w-14rem"
-    />
-  </div>
+      <label>Unit: </label>
+      <SelectButton
+        value={valueUnitTemperature}
+        onChange={(e: SelectButtonChangeEvent) => {
+          setValueUnitTemperature(e.value);
+        }}
+        options={availableUnitsTemperature}
+        optionLabel="name"
+        optionValue="code"
+        className="w-full md:w-14rem"
+      />
+    </div>
   );
 }
 
