@@ -28,12 +28,21 @@ export function App() {
   const onChangeAddressComponents = (acs: IAddressComponent[]) =>
     setAddressComponents([...acs]);
 
-  // useEffect(() => {
-  //   console.log(`latitude : ${latitude}`);
-  // }, [latitude]);
-  // useEffect(() => {
-  //   console.log(`longitude : ${longitude}`);
-  // }, [longitude]);
+  useEffect(() => {
+    console.log(`latitude : ${latitude}`);
+  }, [latitude]);
+  useEffect(() => {
+    console.log(`longitude : ${longitude}`);
+  }, [longitude]);
+  useEffect(() => {
+    console.log(`addressComponents : ${JSON.stringify(addressComponents)}`);
+  }, [addressComponents]);
+  useEffect(() => {
+    console.log(`startDate : ${startDate.toUTCString()}`);
+  }, [startDate]);
+  useEffect(() => {
+    console.log(`endDate : ${endDate.toUTCString()}`);
+  }, [endDate]);
 
   return (
     <>

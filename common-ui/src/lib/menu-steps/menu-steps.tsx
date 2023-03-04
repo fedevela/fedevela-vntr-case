@@ -1,15 +1,19 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './menu-steps.module.css';
-import React, { useState, useRef } from 'react';
+
+import { useState, useRef } from 'react';
+
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
 import { MenuItem } from 'primereact/menuitem';
 import { Card } from 'primereact/card';
-import ChooseLocation from '../choose-location/choose-location';
 import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
 import { PrimeIcons } from 'primereact/api';
+
+import ChooseLocation from '../choose-location/choose-location';
 import ChooseDateTimeRange from '../choose-date-time-range/choose-date-time-range';
+
 import { IAddressComponent } from '@fedevela-vntr-case/api';
 
 export interface MenuStepsProps {
@@ -21,7 +25,13 @@ export interface MenuStepsProps {
 }
 
 export function MenuSteps(props: MenuStepsProps) {
-  const { setLatitude, setLongitude, onChangeAddressComponents } = props;
+  const {
+    setLatitude,
+    setLongitude,
+    onChangeAddressComponents,
+    setStartDate,
+    setEndDate,
+  } = props;
   const [shouldDisableNextButton, setShouldDisableNextButton] =
     useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -70,7 +80,13 @@ export function MenuSteps(props: MenuStepsProps) {
                 ></ChooseLocation>
               );
             case 1:
-              return <ChooseDateTimeRange></ChooseDateTimeRange>;
+              return (
+                <ChooseDateTimeRange
+                  setShouldDisableNextButton={setShouldDisableNextButton}
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                ></ChooseDateTimeRange>
+              );
             case 2:
               return <div>two</div>;
             case 3:
@@ -99,7 +115,10 @@ export function MenuSteps(props: MenuStepsProps) {
                 <Button
                   disabled={shouldDisableNextButton}
                   label="Next >>"
-                  onClick={() => setActiveIndex(activeIndex + 1)}
+                  onClick={() => {
+                    setActiveIndex(activeIndex + 1);
+                    setShouldDisableNextButton(true);
+                  }}
                 />
               )}
             </div>

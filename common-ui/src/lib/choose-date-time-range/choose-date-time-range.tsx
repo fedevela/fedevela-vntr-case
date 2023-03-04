@@ -4,18 +4,31 @@ import { RangePicker } from 'react-minimal-datetime-range';
 import styles from './choose-date-time-range.module.css';
 import 'react-minimal-datetime-range/lib/react-minimal-datetime-range.css';
 
-/* eslint-disable-next-line */
-export interface ChooseDateTimeRangeProps {}
+export interface ChooseDateTimeRangeProps {
+  setShouldDisableNextButton: (sdnb: boolean) => void;
+  setStartDate: (sd: Date) => void;
+  setEndDate: (ed: Date) => void;
+}
 
 export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
+  const { setShouldDisableNextButton, setStartDate, setEndDate } = props;
   const now = new Date();
   const [hour] = useState('00');
   const [minute] = useState('00');
-  const [month] = useState(
-    String(now.getMonth() + 1).padStart(2, '0')
-  );
+  const [month] = useState(String(now.getMonth() + 1).padStart(2, '0'));
   const [date] = useState(String(now.getDate()).padStart(2, '0'));
   const [year] = useState(String(now.getFullYear()));
+
+  const prepareDateString = (dateStr: string) =>
+    dateStr.split(' ').join('T') + ':00.000Z';
+
+  const handleOnConfirm = (dates: string[]) => {
+    const [startDateStr, endDateStr] = dates;
+    setStartDate(new Date(prepareDateString(startDateStr)));
+    setEndDate(new Date(prepareDateString(endDateStr)));
+    setShouldDisableNextButton(false);
+  };
+
   return (
     <div className={styles['container']}>
       <div className="field">
@@ -36,12 +49,9 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
             year + '-' + month + '-' + date,
           ]} // ['YYYY-MM-DD', 'YYYY-MM-DD']
           initialTimes={[hour + ':' + minute, hour + ':' + minute]} // ['hh:mm', 'hh:mm']
-          onConfirm={(dates:string[]) => {
-            const [dateStartStr, dateEndStr ] = dates;
-            debugger;
-          }}
+          onConfirm={handleOnConfirm}
           // onClose={() => console.log('closed')}
-          style={{ width: '400px'}}
+          style={{ width: '400px' }}
         />
       </div>
     </div>
