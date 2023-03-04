@@ -1,7 +1,7 @@
 import styles from './choose-location.module.css';
 import { useRef, useEffect } from 'react';
 import { Divider } from 'primereact/divider';
-import { IKeyValueMap } from '@fedevela-vntr-case/api';
+import { IKeyValueMap } from '../common-ui';
 
 export interface ChooseLocationProps {
   onChangeAddressComponents: (acs: IKeyValueMap[]) => void;

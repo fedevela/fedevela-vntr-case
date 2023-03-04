@@ -7,10 +7,10 @@ import 'primeflex/primeflex.css';
 import { Toast } from 'primereact/toast';
 import {
   exampleMeteomaticsAPI,
-  IKeyValueMap,
   IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
 import {
+  IKeyValueMap,
   DisplayGraph,
   MenuSteps,
   DATE_ZERO,
@@ -49,35 +49,6 @@ export function App() {
       setShouldRefreshGraph(false);
     }
   }, [shouldRefreshGraph, setShouldRefreshGraph]);
-
-  // useEffect(() => {
-  //   console.log(`latitude : ${latitude}`);
-  // }, [latitude]);
-  // useEffect(() => {
-  //   console.log(`longitude : ${longitude}`);
-  // }, [longitude]);
-  // useEffect(() => {
-  //   console.log(`addressComponents : ${JSON.stringify(addressComponents)}`);
-  // }, [addressComponents]);
-  // useEffect(() => {
-  //   console.log(`startDate : ${startDate.toUTCString()}`);
-  // }, [startDate]);
-  // useEffect(() => {
-  //   console.log(`endDate : ${endDate.toUTCString()}`);
-  // }, [endDate]);
-  // useEffect(() => {
-  //   console.log(`endDate : ${endDate.toUTCString()}`);
-  // }, [endDate]);
-  // useEffect(() => {
-  //   console.log(`result : `);
-  //   console.log(resultMeteomaticsAPIRaw);
-  // }, [resultMeteomaticsAPIRaw]);
-  // useEffect(() => {
-  //   console.log(`graphIntervalType : ${graphIntervalType}`);
-  // }, [graphIntervalType]);
-  // useEffect(() => {
-  //   console.log(`graphPlotType : ${graphPlotType}`);
-  // }, [graphPlotType]);
 
   return (
     <>

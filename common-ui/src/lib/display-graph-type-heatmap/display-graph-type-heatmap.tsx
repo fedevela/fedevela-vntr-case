@@ -1,21 +1,19 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './display-graph-type-heatmap.module.css';
 import { HeatMapGrid } from 'react-grid-heatmap';
-import {
-  array24HLabels,
-  IGraphDataPoint,
-} from '@fedevela-vntr-case/api';
+
+import { createArray24HLabels, IGraphDataPoint } from '../common-ui';
 
 export interface DisplayGraphTypeHeatmapProps {
   graphDataPoints: IGraphDataPoint[];
 }
 
 export function DisplayGraphTypeHeatmap(props: DisplayGraphTypeHeatmapProps) {
-  const {graphDataPoints} = props;
+  const { graphDataPoints } = props;
 
   console.log(graphDataPoints);
 
-  const xLabels = array24HLabels();
+  const xLabels = createArray24HLabels();
   const yLabels = [...new Set(graphDataPoints.map((gdp) => gdp.ymdLabel))];
   const plotData = new Array(yLabels.length)
     .fill(0)

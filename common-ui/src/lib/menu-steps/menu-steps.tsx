@@ -13,9 +13,9 @@ import { PrimeIcons } from 'primereact/api';
 import ChooseLocation from '../choose-location/choose-location';
 import ChooseDateTimeRange from '../choose-date-time-range/choose-date-time-range';
 
-import { IKeyValueMap } from '@fedevela-vntr-case/api';
 import ChooseWeatherParameters from '../choose-weather-parameters/choose-weather-parameters';
 import ChooseGraphPlotType from '../choose-graph-plot-type/choose-graph-plot-type';
+import { IKeyValueMap } from '../common-ui';
 
 export interface MenuStepsProps {
   setGraphPlotType: (gpt: string) => void;

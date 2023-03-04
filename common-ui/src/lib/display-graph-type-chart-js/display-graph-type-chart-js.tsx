@@ -4,11 +4,8 @@ import styles from './display-graph-type-chart-js.module.css';
 import { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 import Matercolor from 'matercolors';
-import {
-  array24HLabels,
-  IGraphDataPoint,
-  IGroupedValuesMap,
-} from '@fedevela-vntr-case/api';
+import { IGroupedValuesMap } from '@fedevela-vntr-case/api';
+import { createArray24HLabels, IGraphDataPoint } from '../common-ui';
 
 export interface DisplayGraphTypeChartJSProps {
   graphDataPoints: IGraphDataPoint[];
@@ -32,7 +29,7 @@ export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
   const { graphDataPoints } = props;
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
-  const chartLabels = array24HLabels();
+  const chartLabels = createArray24HLabels();
 
   const gdpGroupedByYMD: IGroupedValuesMap = {};
   graphDataPoints.forEach((gdp) => {
