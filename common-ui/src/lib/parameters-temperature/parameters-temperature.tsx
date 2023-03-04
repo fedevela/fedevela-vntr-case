@@ -1,9 +1,11 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import styles from './temperature-parameters.module.css';
+import styles from './parameters-temperature.module.css';
 import { useState } from 'react';
 import { Slider, SliderChangeEvent } from 'primereact/slider';
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 import { Card } from 'primereact/card';
+import { Divider } from 'primereact/divider';
+
 import { IListBoxItem, LEVEL_METERS_MAX, LEVEL_METERS_MIN } from '../common-ui';
 
 /* eslint-disable-next-line */
@@ -11,9 +13,14 @@ export interface TemperatureParametersProps {}
 
 export function TemperatureParameters(props: TemperatureParametersProps) {
   const [valueLevelMeters, setValueLevelMeters] = useState<number>(1000);
-  const [valueMeasureMMM, setValueMeasureMMM] = useState<IListBoxItem | null>(null);
-  const [valueIntervalHD, setValueIntervalHD] = useState<IListBoxItem | null>(null);
-  const [valueUnitTemperature, setValueUnitTemperature] = useState<IListBoxItem | null>(null);
+  const [valueMeasureMMM, setValueMeasureMMM] = useState<IListBoxItem | null>(
+    null
+  );
+  const [valueIntervalHD, setValueIntervalHD] = useState<IListBoxItem | null>(
+    null
+  );
+  const [valueUnitTemperature, setValueUnitTemperature] =
+    useState<IListBoxItem | null>(null);
 
   const availableMeasuresMMM: IListBoxItem[] = [
     { name: 'Min', code: 'min' },
@@ -34,7 +41,7 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     <div className={styles['container']}>
       <Card>
         <div className="field">
-          <label>Level (Meters): {valueLevelMeters} m</label>{' '}
+          <label>Level (Meters): {valueLevelMeters} m</label>
           <Slider
             value={valueLevelMeters}
             onChange={(e: SliderChangeEvent) => setValueLevelMeters(e.value)}
@@ -43,39 +50,42 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
             className="w-full"
           />
         </div>
-      </Card>
-      <Card>
+        <Divider></Divider>
         <div className="field">
-          <label>Measure: </label>{' '}
+          <label>Measure: </label>
           <SelectButton
             value={valueMeasureMMM}
-            onChange={(e: SelectButtonChangeEvent) => setValueMeasureMMM(e.value)}
+            onChange={(e: SelectButtonChangeEvent) =>
+              setValueMeasureMMM(e.value)
+            }
             options={availableMeasuresMMM}
             optionLabel="name"
             optionValue="code"
             className="w-full md:w-14rem"
           />
         </div>
-      </Card>
-      <Card>
+        <Divider></Divider>
         <div className="field">
-          <label>Interval: </label>{' '}
+          <label>Interval: </label>
           <SelectButton
             value={valueIntervalHD}
-            onChange={(e: SelectButtonChangeEvent) => setValueIntervalHD(e.value)}
+            onChange={(e: SelectButtonChangeEvent) =>
+              setValueIntervalHD(e.value)
+            }
             options={availableIntervalsHD}
             optionLabel="name"
             optionValue="code"
             className="w-full md:w-14rem"
           />
         </div>
-      </Card>
-      <Card>
+        <Divider></Divider>
         <div className="field">
-          <label>Unit: </label>{' '}
+          <label>Unit: </label>
           <SelectButton
             value={valueUnitTemperature}
-            onChange={(e: SelectButtonChangeEvent) => setValueUnitTemperature(e.value)}
+            onChange={(e: SelectButtonChangeEvent) =>
+              setValueUnitTemperature(e.value)
+            }
             options={availableUnitsTemperature}
             optionLabel="name"
             optionValue="code"

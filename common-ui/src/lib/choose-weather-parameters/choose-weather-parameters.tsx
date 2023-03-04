@@ -1,9 +1,9 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './choose-weather-parameters.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
-import TemperatureParameters from '../temperature-parameters/temperature-parameters';
+import TemperatureParameters from '../parameters-temperature/parameters-temperature';
 
 
 /* eslint-disable-next-line */
@@ -15,7 +15,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
 
   return (
     <div className={styles['container']}>
-      <h2>Please choose the parameter you wish to see:</h2>
+      <h3>Please choose the parameter you wish to see:</h3>
       <Accordion
         activeIndex={activeTabIndex}
         onTabChange={(e) => setActiveTabIndex(e.index)}

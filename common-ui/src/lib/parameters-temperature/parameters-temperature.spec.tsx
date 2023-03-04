@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import TemperatureParameters from './temperature-parameters';
+import TemperatureParameters from './parameters-temperature';
 
 describe('TemperatureParameters', () => {
   it('should render successfully', () => {
