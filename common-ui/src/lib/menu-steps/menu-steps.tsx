@@ -42,6 +42,8 @@ export function MenuSteps(props: MenuStepsProps) {
   } = props;
   const [shouldDisableNextButton, setShouldDisableNextButton] =
     useState<boolean>(true);
+  const [shouldDisableGraphButton, setShouldDisableGraphButton] =
+    useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const toast = useRef(null);
   const items: MenuItem = [
@@ -108,9 +110,7 @@ export function MenuSteps(props: MenuStepsProps) {
               );
             case 3:
               return (
-                <ChooseGraphPlotType
-                  setGraphPlotType={setGraphPlotType}
-                />
+                <ChooseGraphPlotType setGraphPlotType={setGraphPlotType} />
               );
             default:
               return <div>NULL</div>;
@@ -123,7 +123,10 @@ export function MenuSteps(props: MenuStepsProps) {
             <div className="card flex justify-content-center">
               {activeIndex > 0 && (
                 <Button
-                  label="<< Previous"
+                  label="Previous"
+                  icon="pi pi-backward"
+                  iconPos="left"
+                  severity="info"
                   onClick={() => setActiveIndex(activeIndex - 1)}
                 />
               )}
@@ -134,7 +137,23 @@ export function MenuSteps(props: MenuStepsProps) {
               {activeIndex < 3 && (
                 <Button
                   disabled={shouldDisableNextButton}
-                  label="Next >>"
+                  label="Next"
+                  icon="pi pi-forward"
+                  iconPos="right"
+                  severity="info"
+                  onClick={() => {
+                    setActiveIndex(activeIndex + 1);
+                    setShouldDisableNextButton(true);
+                  }}
+                />
+              )}
+              {activeIndex === 3 && (
+                <Button
+                  disabled={shouldDisableGraphButton}
+                  label="Show Graph!"
+                  icon="pi pi-check"
+                  iconPos="right"
+                  severity="success"
                   onClick={() => {
                     setActiveIndex(activeIndex + 1);
                     setShouldDisableNextButton(true);
