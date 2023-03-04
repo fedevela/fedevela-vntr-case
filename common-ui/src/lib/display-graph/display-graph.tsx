@@ -32,24 +32,28 @@ export function DisplayGraph(props: DisplayGraphProps) {
   );
 
   return (
-    <div className={styles['container']}>
-      <Card>
-        {(() => {
-          switch (graphPlotType) {
-            case 'heatmap':
-              return (
-                <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
-              );
-            case 'line':
-              return (
-                <DisplayGraphTypeChartJS graphDataPoints={graphDataPoints} />
-              );
-            default:
-              return <div>NULL</div>;
-          }
-        })()}
-      </Card>
-    </div>
+    <>
+      {(() => {
+        switch (graphPlotType) {
+          case 'heatmap':
+            return (
+              <div className={styles['container']}>
+                <Card>
+                  <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
+                </Card>
+              </div>
+            );
+          case 'line':
+            return (
+              <div className={styles['container']}>
+                <Card>
+                  <DisplayGraphTypeChartJS graphDataPoints={graphDataPoints} />
+                </Card>
+              </div>
+            );
+        }
+      })()}
+    </>
   );
 }
 

@@ -26,6 +26,8 @@ export interface MenuStepsProps {
   onChangeAddressComponents: (acs: IKeyValueMap[]) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
+  setWeatherParameterLabel: (git: string) => void;
+  weatherParameterLabel: string;
   addressComponents: IKeyValueMap[];
   toast: any;
   startDate: Date;
@@ -42,6 +44,8 @@ export function MenuSteps(props: MenuStepsProps) {
     setWeatherParameterStringValue,
     setGraphIntervalType,
     setGraphPlotType,
+    setWeatherParameterLabel,
+    weatherParameterLabel,
     addressComponents,
     toast,
     startDate,
@@ -116,11 +120,17 @@ export function MenuSteps(props: MenuStepsProps) {
                   }
                   setShouldDisableNextButton={setShouldDisableNextButton}
                   setGraphIntervalType={setGraphIntervalType}
+                  weatherParameterLabel={weatherParameterLabel}
+                  setWeatherParameterLabel={setWeatherParameterLabel}
+                  toast={toast}
                 />
               );
             case 3:
               return (
-                <ChooseGraphPlotType setGraphPlotType={setGraphPlotType} />
+                <ChooseGraphPlotType
+                  setGraphPlotType={setGraphPlotType}
+                  setShouldDisableGraphButton={setShouldDisableGraphButton}
+                />
               );
             default:
               return <div>NULL</div>;

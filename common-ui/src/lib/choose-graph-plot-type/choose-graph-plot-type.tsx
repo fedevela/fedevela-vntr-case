@@ -7,10 +7,11 @@ import { IListBoxItem } from '../common-ui';
 
 export interface ChooseGraphPlotTypeProps {
   setGraphPlotType: (gpt: string) => void;
+  setShouldDisableGraphButton: (gpt: boolean) => void;
 }
 
 export function ChooseGraphPlotType(props: ChooseGraphPlotTypeProps) {
-  const { setGraphPlotType } = props;
+  const { setGraphPlotType, setShouldDisableGraphButton } = props;
   const [valueGraphPlotType, setValueGraphPlotType] = useState<string>('');
   const availableGraphPlotTypes: IListBoxItem[] = [
     { name: 'Heat Map', code: 'heatmap', icon: PrimeIcons.QRCODE },
@@ -20,7 +21,8 @@ export function ChooseGraphPlotType(props: ChooseGraphPlotTypeProps) {
 
   useEffect(() => {
     setGraphPlotType(valueGraphPlotType);
-  }, [valueGraphPlotType, setGraphPlotType]);
+    setShouldDisableGraphButton(false);
+  }, [valueGraphPlotType, setGraphPlotType, setShouldDisableGraphButton]);
 
   const itemTemplateWithIcon = (option: IListBoxItem) => {
     return (

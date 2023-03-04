@@ -19,8 +19,9 @@ import { useEffect, useRef, useState } from 'react';
 
 export function App() {
   const toast = useRef(null);
+  const [weatherParameterLabel, setWeatherParameterLabel] = useState('');
   const [graphIntervalType, setGraphIntervalType] = useState('1h');
-  const [graphPlotType, setGraphPlotType] = useState('heatmap');
+  const [graphPlotType, setGraphPlotType] = useState('');
   const [startDate, setStartDate] = useState(DATE_ZERO);
   const [endDate, setEndDate] = useState(DATE_ZERO);
   const [latitude, setLatitude] = useState(0.0);
@@ -83,6 +84,8 @@ export function App() {
         setWeatherParameterStringValue={setWeatherParameterStringValue}
         setGraphIntervalType={setGraphIntervalType}
         setGraphPlotType={setGraphPlotType}
+        weatherParameterLabel={weatherParameterLabel}
+        setWeatherParameterLabel={setWeatherParameterLabel}
       />
       <p className="m-0">{weatherParameterStringValue}</p>
       <DisplayGraph

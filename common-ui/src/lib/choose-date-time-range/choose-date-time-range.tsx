@@ -73,14 +73,16 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
           style={{ width: '400px' }}
         />
       </div>
-      <Divider />
       {checkDateIsNotZero(startDate) && checkDateIsNotZero(endDate) && (
-      <div className="field">
-        <label>Chosen Datetime Range:</label>
-        <div>
-          {startDate.toUTCString()} - {endDate.toUTCString()}
-        </div>
-      </div>
+        <>
+          <Divider />
+          <div className="field">
+            <label>Chosen Datetime Range:</label>
+            <div>
+              {startDate.toUTCString()} - {endDate.toUTCString()}
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

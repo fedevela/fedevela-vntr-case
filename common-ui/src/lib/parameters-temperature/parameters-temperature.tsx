@@ -14,6 +14,7 @@ export interface TemperatureParametersProps {
   setGraphIntervalType: (git: string) => void;
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
+  toast: any;
 }
 
 export function TemperatureParameters(props: TemperatureParametersProps) {
@@ -21,6 +22,7 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
     setGraphIntervalType,
+    toast,
   } = props;
   const [parameterStringValueTemperature, setParameterStringValueTemperature] =
     useState<string>('');
@@ -43,8 +45,14 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
       measureMMMVP !== '' &&
       intervalHDVP !== '' &&
       unitTemperatureVP !== ''
-    )
+    ) {
       setShouldDisableNextButton(false);
+      toast.current.show({
+        severity: 'info',
+        summary: 'Weather Parameter Configured!',
+        detail: 'The temperature parameter has been configured.',
+      });
+    }
   }, [
     setParameterStringValueTemperature,
     setShouldDisableNextButton,
