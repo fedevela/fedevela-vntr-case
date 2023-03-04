@@ -14,7 +14,7 @@ import { PrimeIcons } from 'primereact/api';
 import ChooseLocation from '../choose-location/choose-location';
 import ChooseDateTimeRange from '../choose-date-time-range/choose-date-time-range';
 
-import { IAddressComponent } from '@fedevela-vntr-case/api';
+import { IKeyValueMap } from '@fedevela-vntr-case/api';
 import ChooseWeatherParameters from '../choose-weather-parameters/choose-weather-parameters';
 import ChooseGraphPlotType from '../choose-graph-plot-type/choose-graph-plot-type';
 
@@ -24,7 +24,7 @@ export interface MenuStepsProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setStartDate: (sd: Date) => void;
   setEndDate: (ed: Date) => void;
-  onChangeAddressComponents: (acs: IAddressComponent[]) => void;
+  onChangeAddressComponents: (acs: IKeyValueMap[]) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
 }

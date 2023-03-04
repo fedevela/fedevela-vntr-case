@@ -1,69 +1,71 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './display-graph-type-chart-js.module.css';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
+import Matercolor from 'matercolors';
+import {
+  array24HLabels,
+  IGraphDataPoint,
+  IGroupedValuesMap,
+} from '@fedevela-vntr-case/api';
 
-/* eslint-disable-next-line */
-export interface DisplayGraphTypeChartJSProps {}
+export interface DisplayGraphTypeChartJSProps {
+  graphDataPoints: IGraphDataPoint[];
+}
 
 export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
+  const colorPalette = new Matercolor('#6200EE');
+  const colorArray = [
+    colorPalette.palette.primary['50'],
+    colorPalette.palette.primary['100'],
+    colorPalette.palette.primary['200'],
+    colorPalette.palette.primary['300'],
+    colorPalette.palette.primary['400'],
+    colorPalette.palette.primary['500'],
+    colorPalette.palette.primary['600'],
+    colorPalette.palette.primary['700'],
+    colorPalette.palette.primary['800'],
+    colorPalette.palette.primary['900'],
+  ];
+
+  const { graphDataPoints } = props;
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
+  const chartLabels = array24HLabels();
+
+  const gdpGroupedByYMD: IGroupedValuesMap = {};
+  graphDataPoints.forEach((gdp) => {
+    const ymdLabel = gdp.ymdLabel as string;
+    const gdpValue = gdp.value as number;
+    if (!gdpGroupedByYMD[ymdLabel]) {
+      gdpGroupedByYMD[ymdLabel] = [];
+    }
+    gdpGroupedByYMD[ymdLabel].push(gdpValue);
+  });
+
+  const chartDatasets = [
+    ...new Set(
+      Object.keys(gdpGroupedByYMD).map((ymdKey, index) => {
+        return {
+          label: ymdKey,
+          data: gdpGroupedByYMD[ymdKey],
+          fill: false,
+          borderColor: colorArray[index % 10],
+          tension: 0.4,
+        };
+      })
+    ),
+  ];
 
   useEffect(() => {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary'
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
     const data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: documentStyle.getPropertyValue('--blue-500'),
-          tension: 0.4,
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
-          fill: false,
-          borderColor: documentStyle.getPropertyValue('--pink-500'),
-          tension: 0.4,
-        },
-      ],
+      labels: chartLabels,
+      datasets: chartDatasets,
     };
     const options = {
       maintainAspectRatio: false,
       aspectRatio: 0.6,
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor,
-          },
-        },
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-          },
-        },
-        y: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-          },
-        },
-      },
     };
 
     setChartData(data);

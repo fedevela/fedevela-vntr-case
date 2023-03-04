@@ -6,7 +6,7 @@ import 'primeflex/primeflex.css';
 
 import {
   exampleMeteomaticsAPI,
-  IAddressComponent,
+  IKeyValueMap,
   IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
 import { DisplayGraph, MenuSteps } from '@fedevela-vntr-case/common-ui';
@@ -22,14 +22,14 @@ export function App() {
   const [weatherParameterStringValue, setWeatherParameterStringValue] =
     useState<string>('');
   const [addressComponents, setAddressComponents] = useState<
-    IAddressComponent[] | []
+    IKeyValueMap[] | []
   >([]);
 
   const resultMeteomaticsAPIRaw = exampleMeteomaticsAPI();
   const meteomaticsAPIDateValues: IMeteomaticsAPIDateValue[] =
     resultMeteomaticsAPIRaw.data[0].coordinates[0].dates;
 
-  const onChangeAddressComponents = (acs: IAddressComponent[]) =>
+  const onChangeAddressComponents = (acs: IKeyValueMap[]) =>
     setAddressComponents([...acs]);
 
   useEffect(() => {

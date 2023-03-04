@@ -23,8 +23,8 @@ export function DisplayGraph(props: DisplayGraphProps) {
         hour: dvDate.getUTCHours(),
         value: madv.value,
       };
-      dataValuePoint.yLabel = `${dataValuePoint.year}/${dataValuePoint.month}/${dataValuePoint.date}`;
-      dataValuePoint.xLabel = `${dataValuePoint.hour}h`;
+      dataValuePoint.ymdLabel = `${dataValuePoint.year}/${dataValuePoint.month}/${dataValuePoint.date}`;
+      dataValuePoint.hLabel = `${dataValuePoint.hour}h`;
 
       return dataValuePoint;
     }
@@ -33,8 +33,8 @@ export function DisplayGraph(props: DisplayGraphProps) {
   return (
     <div className={styles['container']}>
       <Card>
-        {/* <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} /> */}
-        <DisplayGraphTypeChartJS />
+        <DisplayGraphTypeChartJS  graphDataPoints={graphDataPoints} />
+        <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
       </Card>
     </div>
   );

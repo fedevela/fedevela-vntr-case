@@ -1,9 +1,9 @@
 import styles from './choose-location.module.css';
 import { useRef, useEffect } from 'react';
-import { IAddressComponent } from '@fedevela-vntr-case/api';
+import { IKeyValueMap } from '@fedevela-vntr-case/api';
 
 export interface ChooseLocationProps {
-  onChangeAddressComponents: (acs: IAddressComponent[]) => void;
+  onChangeAddressComponents: (acs: IKeyValueMap[]) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
@@ -35,7 +35,7 @@ export function ChooseLocation(props: ChooseLocationProps) {
       const addressComponents = place.address_components.map(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (ac: { types: any[]; long_name: any }) => {
-          const addressComponent: IAddressComponent = {};
+          const addressComponent: IKeyValueMap = {};
           addressComponent[`${ac.types[0]}`] = ac.long_name;
           return addressComponent;
         }

@@ -1,8 +1,11 @@
 import axios from 'axios';
 import mockMeteomaticsData from './api.mock.json';
 
-export interface IAddressComponent {
+export interface IKeyValueMap {
   [key: string]: string;
+}
+export interface IGroupedValuesMap {
+  [key: string]: number[];
 }
 
 export interface IMeteomaticsAPIDateValue {
@@ -16,9 +19,13 @@ export interface IGraphDataPoint {
   date: number;
   hour: number;
   value: number;
-  yLabel?: string;
-  xLabel?: string;
+  ymdLabel?: string;
+  hLabel?: string;
 }
+
+export const array24HLabels = () => {
+  return new Array(24).fill(0).map((_, i) => `${i}h`);
+};
 
 export const exampleMeteomaticsAPI = () => mockMeteomaticsData;
 

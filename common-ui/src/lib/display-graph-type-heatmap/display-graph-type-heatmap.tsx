@@ -2,6 +2,7 @@
 import styles from './display-graph-type-heatmap.module.css';
 import { HeatMapGrid } from 'react-grid-heatmap';
 import {
+  array24HLabels,
   IGraphDataPoint,
 } from '@fedevela-vntr-case/api';
 
@@ -14,14 +15,14 @@ export function DisplayGraphTypeHeatmap(props: DisplayGraphTypeHeatmapProps) {
 
   console.log(graphDataPoints);
 
-  const xLabels = new Array(24).fill(0).map((_, i) => `${i}h`);
-  const yLabels = [...new Set(graphDataPoints.map((gdp) => gdp.yLabel))];
+  const xLabels = array24HLabels();
+  const yLabels = [...new Set(graphDataPoints.map((gdp) => gdp.ymdLabel))];
   const plotData = new Array(yLabels.length)
     .fill(0)
     .map(() => new Array(xLabels.length).fill(null));
   graphDataPoints.forEach((gdp: IGraphDataPoint) => {
-    const xCoord = xLabels.indexOf(gdp.xLabel);
-    const yCoord = yLabels.indexOf(gdp.yLabel);
+    const xCoord = xLabels.indexOf(gdp.hLabel);
+    const yCoord = yLabels.indexOf(gdp.ymdLabel);
     plotData[yCoord][xCoord] = gdp.value;
   });
 
