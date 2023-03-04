@@ -6,12 +6,17 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import TemperatureParameters from '../parameters-temperature/parameters-temperature';
 
 export interface ChooseWeatherParametersProps {
+  setGraphIntervalType: (git: string) => void;
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
 }
 
 export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
-  const { setWeatherParameterStringValue, setShouldDisableNextButton } = props;
+  const {
+    setWeatherParameterStringValue,
+    setShouldDisableNextButton,
+    setGraphIntervalType,
+  } = props;
   const [activeTabIndex, setActiveTabIndex] = useState<number>(-1);
 
   return (
@@ -25,6 +30,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
           <TemperatureParameters
             setWeatherParameterStringValue={setWeatherParameterStringValue}
             setShouldDisableNextButton={setShouldDisableNextButton}
+            setGraphIntervalType={setGraphIntervalType}
           />
         </AccordionTab>
       </Accordion>

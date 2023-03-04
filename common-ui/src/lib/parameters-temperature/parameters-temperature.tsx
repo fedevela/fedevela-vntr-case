@@ -11,12 +11,17 @@ import ValueParameterIntervalHD from '../value-parameter-interval-hd/value-param
 import ValueParameterUnitTemperature from '../value-parameter-unit-temperature/value-parameter-unit-temperature';
 
 export interface TemperatureParametersProps {
+  setGraphIntervalType: (git: string) => void;
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
 }
 
 export function TemperatureParameters(props: TemperatureParametersProps) {
-  const { setWeatherParameterStringValue, setShouldDisableNextButton } = props;
+  const {
+    setWeatherParameterStringValue,
+    setShouldDisableNextButton,
+    setGraphIntervalType,
+  } = props;
   const [parameterStringValueTemperature, setParameterStringValueTemperature] =
     useState<string>('');
   //"t_min_2m_1h:C"
@@ -48,6 +53,10 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     intervalHDVP,
     unitTemperatureVP,
   ]);
+
+  useEffect(() => {
+    setGraphIntervalType(intervalHDVP);
+  }, [setGraphIntervalType, intervalHDVP]);
 
   return (
     <div className={styles['container']}>

@@ -18,6 +18,8 @@ import { IAddressComponent } from '@fedevela-vntr-case/api';
 import ChooseWeatherParameters from '../choose-weather-parameters/choose-weather-parameters';
 
 export interface MenuStepsProps {
+  setGraphPlotType: (gpt: string) => void;
+  setGraphIntervalType: (git: string) => void;
   setWeatherParameterStringValue: (psv: string) => void;
   setStartDate: (sd: Date) => void;
   setEndDate: (ed: Date) => void;
@@ -34,6 +36,8 @@ export function MenuSteps(props: MenuStepsProps) {
     setStartDate,
     setEndDate,
     setWeatherParameterStringValue,
+    setGraphIntervalType,
+    setGraphPlotType,
   } = props;
   const [shouldDisableNextButton, setShouldDisableNextButton] =
     useState<boolean>(true);
@@ -98,6 +102,7 @@ export function MenuSteps(props: MenuStepsProps) {
                     setWeatherParameterStringValue
                   }
                   setShouldDisableNextButton={setShouldDisableNextButton}
+                  setGraphIntervalType={setGraphIntervalType}
                 />
               );
             case 3:
