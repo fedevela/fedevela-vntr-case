@@ -28,6 +28,8 @@ export interface MenuStepsProps {
   setLongitude: (longitude: number) => void;
   addressComponents: IKeyValueMap[];
   toast: any;
+  startDate: Date;
+  endDate: Date;
 }
 
 export function MenuSteps(props: MenuStepsProps) {
@@ -42,6 +44,8 @@ export function MenuSteps(props: MenuStepsProps) {
     setGraphPlotType,
     addressComponents,
     toast,
+    startDate,
+    endDate,
   } = props;
   const [shouldDisableNextButton, setShouldDisableNextButton] =
     useState<boolean>(true);
@@ -52,22 +56,22 @@ export function MenuSteps(props: MenuStepsProps) {
     {
       label: 'Location',
       icon: PrimeIcons.COMPASS,
-      // disabled: false,
+      disabled: false,
     },
     {
       label: 'Date and Time',
       icon: PrimeIcons.CALENDAR,
-      // disabled: activeIndex < 1,
+      disabled: activeIndex < 1,
     },
     {
       label: 'Weather Parameters',
       icon: PrimeIcons.BOLT,
-      // disabled: activeIndex < 2,
+      disabled: activeIndex < 2,
     },
     {
       label: 'Graph Type',
       icon: PrimeIcons.MAP,
-      // disabled: activeIndex < 3,
+      disabled: activeIndex < 3,
     },
   ];
   return (
@@ -99,6 +103,9 @@ export function MenuSteps(props: MenuStepsProps) {
                   setShouldDisableNextButton={setShouldDisableNextButton}
                   setStartDate={setStartDate}
                   setEndDate={setEndDate}
+                  startDate={startDate}
+                  endDate={endDate}
+                  toast={toast}
                 />
               );
             case 2:
@@ -124,7 +131,7 @@ export function MenuSteps(props: MenuStepsProps) {
         <div className="formgrid grid">
           <div className="field col">
             <div className="card flex justify-content-center">
-              {activeIndex > 0 && (
+              {false && activeIndex > 0 && (
                 <Button
                   label="Previous"
                   icon="pi pi-backward"

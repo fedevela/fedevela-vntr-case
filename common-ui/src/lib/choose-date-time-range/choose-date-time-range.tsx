@@ -1,17 +1,29 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { useState } from 'react';
+import { Divider } from 'primereact/divider';
 import { RangePicker } from 'react-minimal-datetime-range';
 import styles from './choose-date-time-range.module.css';
 import 'react-minimal-datetime-range/lib/react-minimal-datetime-range.css';
+import { checkDateIsNotZero } from '../common-ui';
 
 export interface ChooseDateTimeRangeProps {
   setShouldDisableNextButton: (sdnb: boolean) => void;
   setStartDate: (sd: Date) => void;
   setEndDate: (ed: Date) => void;
+  startDate: Date;
+  endDate: Date;
+  toast: any;
 }
 
 export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
-  const { setShouldDisableNextButton, setStartDate, setEndDate } = props;
+  const {
+    setShouldDisableNextButton,
+    setStartDate,
+    setEndDate,
+    startDate,
+    endDate,
+    toast,
+  } = props;
   const now = new Date();
   const [hour] = useState('00');
   const [minute] = useState('00');
@@ -24,9 +36,16 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
 
   const handleOnConfirm = (dates: string[]) => {
     const [startDateStr, endDateStr] = dates;
-    setStartDate(new Date(prepareDateString(startDateStr)));
-    setEndDate(new Date(prepareDateString(endDateStr)));
+    const aStartDate = new Date(prepareDateString(startDateStr));
+    setStartDate(aStartDate);
+    const aEndDate = new Date(prepareDateString(endDateStr));
+    setEndDate(aEndDate);
     setShouldDisableNextButton(false);
+    toast.current.show({
+      severity: 'info',
+      summary: 'Date range chosen!',
+      detail: `${startDate.toUTCString()} - ${endDate.toUTCString()}`,
+    });
   };
 
   return (
@@ -54,6 +73,15 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
           style={{ width: '400px' }}
         />
       </div>
+      <Divider />
+      {checkDateIsNotZero(startDate) && checkDateIsNotZero(endDate) && (
+      <div className="field">
+        <label>Chosen Datetime Range:</label>
+        <div>
+          {startDate.toUTCString()} - {endDate.toUTCString()}
+        </div>
+      </div>
+      )}
     </div>
   );
 }

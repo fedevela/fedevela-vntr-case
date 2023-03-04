@@ -10,15 +10,19 @@ import {
   IKeyValueMap,
   IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
-import { DisplayGraph, MenuSteps } from '@fedevela-vntr-case/common-ui';
+import {
+  DisplayGraph,
+  MenuSteps,
+  DATE_ZERO,
+} from '@fedevela-vntr-case/common-ui';
 import { useEffect, useRef, useState } from 'react';
 
 export function App() {
   const toast = useRef(null);
   const [graphIntervalType, setGraphIntervalType] = useState('1h');
   const [graphPlotType, setGraphPlotType] = useState('heatmap');
-  const [startDate, setStartDate] = useState(new Date(0));
-  const [endDate, setEndDate] = useState(new Date(0));
+  const [startDate, setStartDate] = useState(DATE_ZERO);
+  const [endDate, setEndDate] = useState(DATE_ZERO);
   const [latitude, setLatitude] = useState(0.0);
   const [longitude, setLongitude] = useState(0.0);
   const [weatherParameterStringValue, setWeatherParameterStringValue] =
@@ -74,6 +78,8 @@ export function App() {
         toast={toast}
         setStartDate={setStartDate}
         setEndDate={setEndDate}
+        startDate={startDate}
+        endDate={endDate}
         setWeatherParameterStringValue={setWeatherParameterStringValue}
         setGraphIntervalType={setGraphIntervalType}
         setGraphPlotType={setGraphPlotType}

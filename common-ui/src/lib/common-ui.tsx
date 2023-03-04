@@ -23,3 +23,8 @@ export const LEVEL_METERS_MAX = 20000;
 export interface IValueParameterProps {
   setValueParameter: (vp: string) => void;
 }
+
+export const DATE_ZERO = new Date(0);
+
+export const checkDateIsNotZero = (aDate: Date) =>
+  aDate.toUTCString() !== DATE_ZERO.toUTCString();
