@@ -1,14 +1,23 @@
 import axios from 'axios';
 import mockMeteomaticsData from './api.mock.json';
 
-export interface MeteomaticsAPI {
-  id: string;
-  name: string;
-  price: number;
-}
-
 export interface IAddressComponent {
   [key: string]: string;
+}
+
+export interface IMeteomaticsAPIDateValue {
+  date: string;
+  value: number;
+}
+
+export interface IGraphDataPoint {
+  year: number;
+  month: number;
+  date: number;
+  hour: number;
+  value: number;
+  yLabel?: string;
+  xLabel?: string;
 }
 
 export const exampleMeteomaticsAPI = () => mockMeteomaticsData;

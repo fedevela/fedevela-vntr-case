@@ -20,8 +20,6 @@ export interface IListBoxItem {
 export const LEVEL_METERS_MIN = 2;
 export const LEVEL_METERS_MAX = 20000;
 
-
 export interface IValueParameterProps {
   setValueParameter: (vp: string) => void;
 }
-
