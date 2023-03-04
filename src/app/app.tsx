@@ -9,13 +9,13 @@ import { HeatMapGrid } from 'react-grid-heatmap';
 import {
   exampleMeteomaticsAPI,
   IAddressComponent,
+  IGraphDataPoint,
+  IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
 import { MenuSteps } from '@fedevela-vntr-case/common-ui';
 import { useEffect, useState } from 'react';
 
 export function App() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result: any[] = exampleMeteomaticsAPI();
   const [graphIntervalType, setGraphIntervalType] = useState('1h');
   const [graphPlotType, setGraphPlotType] = useState('heatmap');
   const [startDate, setStartDate] = useState(new Date(0));
@@ -28,15 +28,38 @@ export function App() {
     IAddressComponent[] | []
   >([]);
 
-  const xLabels = new Array(24).fill(0).map((_, i) => `${i}`);
-  const yLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-  const data = new Array(yLabels.length)
+  const resultMeteomaticsAPIRaw = exampleMeteomaticsAPI();
+  const meteomaticsAPIDateValues: IMeteomaticsAPIDateValue[] =
+    resultMeteomaticsAPIRaw.data[0].coordinates[0].dates;
+  const graphDataPoints: IGraphDataPoint[] = meteomaticsAPIDateValues.map(
+    (madv) => {
+      const dvDate = new Date(madv.date);
+      const dataValuePoint: IGraphDataPoint = {
+        year: dvDate.getUTCFullYear(),
+        month: dvDate.getUTCMonth() + 1,
+        date: dvDate.getUTCDate(),
+        hour: dvDate.getUTCHours(),
+        value: madv.value,
+      };
+      dataValuePoint.yLabel = `${dataValuePoint.year}/${dataValuePoint.month}/${dataValuePoint.date}`;
+      dataValuePoint.xLabel = `${dataValuePoint.hour}h`;
+
+      return dataValuePoint;
+    }
+  );
+
+  console.log(graphDataPoints);
+
+  const xLabels = new Array(24).fill(0).map((_, i) => `${i}h`);
+  const yLabels = [...new Set(graphDataPoints.map( (gdp) => gdp.yLabel ))];
+  const plotData = new Array(yLabels.length)
     .fill(0)
-    .map(() =>
-      new Array(xLabels.length)
-        .fill(0)
-        .map(() => Math.floor(Math.random() * 50 + 50))
-    );
+    .map(() => new Array(xLabels.length).fill(null));
+  graphDataPoints.forEach((gdp: IGraphDataPoint) => {
+    const xCoord = xLabels.indexOf(gdp.xLabel);
+    const yCoord = yLabels.indexOf(gdp.yLabel);
+    plotData[yCoord][xCoord] = gdp.value;
+  });
 
   const onChangeAddressComponents = (acs: IAddressComponent[]) =>
     setAddressComponents([...acs]);
@@ -61,8 +84,8 @@ export function App() {
   }, [endDate]);
   useEffect(() => {
     console.log(`result : `);
-    console.log(result);
-  }, [result]);
+    console.log(resultMeteomaticsAPIRaw);
+  }, [resultMeteomaticsAPIRaw]);
   useEffect(() => {
     console.log(`graphIntervalType : ${graphIntervalType}`);
   }, [graphIntervalType]);
@@ -89,7 +112,7 @@ export function App() {
         }}
       >
         <HeatMapGrid
-          data={data}
+          data={plotData}
           xLabels={xLabels}
           yLabels={yLabels}
           // Render cell with tooltip
@@ -97,7 +120,7 @@ export function App() {
             <div title={`Pos(${x}, ${y}) = ${value}`}>{value}</div>
           )}
           xLabelsStyle={(index) => ({
-            color: index % 2 ? 'transparent' : '#777',
+            color: '#777',
             fontSize: '.8rem',
           })}
           yLabelsStyle={() => ({
@@ -108,11 +131,10 @@ export function App() {
           cellStyle={(_x, _y, ratio) => ({
             background: `rgb(12, 160, 44, ${ratio})`,
             fontSize: '.8rem',
-            color: `rgb(0, 0, 0, ${ratio / 2 + 0.4})`,
+            color: `rgb(0, 0, 0, ${ratio / 2 + 0.5})`,
           })}
           cellHeight="2rem"
           xLabelsPos="top"
-          onClick={(x, y) => alert(`Clicked (${x}, ${y})`)}
           yLabelsPos="left"
           square
         />
