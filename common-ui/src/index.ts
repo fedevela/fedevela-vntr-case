@@ -1,3 +1,4 @@
+export * from './lib/display-graph-type-chart-js/display-graph-type-chart-js';
 export * from './lib/display-graph-type-heatmap/display-graph-type-heatmap';
 export * from './lib/display-graph/display-graph';
 export * from './lib/choose-graph-plot-type/choose-graph-plot-type';

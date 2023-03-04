@@ -7,7 +7,6 @@ import 'primeflex/primeflex.css';
 import {
   exampleMeteomaticsAPI,
   IAddressComponent,
-  IGraphDataPoint,
   IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
 import { DisplayGraph, MenuSteps } from '@fedevela-vntr-case/common-ui';

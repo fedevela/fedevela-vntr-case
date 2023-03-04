@@ -15,6 +15,7 @@ export function ChooseGraphPlotType(props: ChooseGraphPlotTypeProps) {
   const availableGraphPlotTypes: IListBoxItem[] = [
     { name: 'Heat Map', code: 'heatmap', icon: PrimeIcons.QRCODE },
     { name: 'Line', code: 'line', icon: PrimeIcons.CHART_LINE },
+    { name: 'Bars', code: 'bar', icon: PrimeIcons.CHART_BAR },
   ];
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export function ChooseGraphPlotType(props: ChooseGraphPlotTypeProps) {
   };
 
   return (
-    <div className={styles['container']}>
+    <div>
       <label>Graph Type: </label>
       <SelectButton
         value={valueGraphPlotType}
@@ -42,7 +43,7 @@ export function ChooseGraphPlotType(props: ChooseGraphPlotTypeProps) {
         itemTemplate={itemTemplateWithIcon}
         optionLabel="name"
         optionValue="code"
-        className="w-full md:w-14rem"
+        className="w-full"
       />
     </div>
   );

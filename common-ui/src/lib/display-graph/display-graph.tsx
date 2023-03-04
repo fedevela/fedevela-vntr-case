@@ -1,9 +1,11 @@
 import styles from './display-graph.module.css';
+import { Card } from 'primereact/card';
 import {
   IGraphDataPoint,
   IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
 import DisplayGraphTypeHeatmap from '../display-graph-type-heatmap/display-graph-type-heatmap';
+import DisplayGraphTypeChartJS from '../display-graph-type-chart-js/display-graph-type-chart-js';
 
 export interface DisplayGraphProps {
   meteomaticsAPIDateValues: IMeteomaticsAPIDateValue[];
@@ -30,7 +32,10 @@ export function DisplayGraph(props: DisplayGraphProps) {
 
   return (
     <div className={styles['container']}>
-      <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
+      <Card>
+        {/* <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} /> */}
+        <DisplayGraphTypeChartJS />
+      </Card>
     </div>
   );
 }

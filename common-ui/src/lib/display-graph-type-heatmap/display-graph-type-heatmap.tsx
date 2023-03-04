@@ -3,7 +3,6 @@ import styles from './display-graph-type-heatmap.module.css';
 import { HeatMapGrid } from 'react-grid-heatmap';
 import {
   IGraphDataPoint,
-  IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
 
 export interface DisplayGraphTypeHeatmapProps {
