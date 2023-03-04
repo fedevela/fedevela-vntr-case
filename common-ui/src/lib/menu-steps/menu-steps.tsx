@@ -54,7 +54,8 @@ export function MenuSteps(props: MenuStepsProps) {
       // disabled: activeIndex < 2,
     },
     {
-      label: 'Confirmation',
+      label: 'Graph Type',
+      icon: PrimeIcons.CHART_LINE,
       // disabled: activeIndex < 3,
     },
   ];
