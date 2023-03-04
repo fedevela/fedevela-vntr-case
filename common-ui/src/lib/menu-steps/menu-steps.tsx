@@ -18,7 +18,7 @@ import { IAddressComponent } from '@fedevela-vntr-case/api';
 import ChooseWeatherParameters from '../choose-weather-parameters/choose-weather-parameters';
 
 export interface MenuStepsProps {
-  setParameterStringValue: (psv: string) => void;
+  setWeatherParameterStringValue: (psv: string) => void;
   setStartDate: (sd: Date) => void;
   setEndDate: (ed: Date) => void;
   onChangeAddressComponents: (acs: IAddressComponent[]) => void;
@@ -33,7 +33,7 @@ export function MenuSteps(props: MenuStepsProps) {
     onChangeAddressComponents,
     setStartDate,
     setEndDate,
-    setParameterStringValue,
+    setWeatherParameterStringValue,
   } = props;
   const [shouldDisableNextButton, setShouldDisableNextButton] =
     useState<boolean>(true);
@@ -94,7 +94,7 @@ export function MenuSteps(props: MenuStepsProps) {
             case 2:
               return (
                 <ChooseWeatherParameters
-                  setParameterStringValue={setParameterStringValue}
+                setWeatherParameterStringValue={setWeatherParameterStringValue}
                 />
               );
             case 3:

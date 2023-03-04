@@ -11,11 +11,11 @@ import ValueParameterIntervalHD from '../value-parameter-interval-hd/value-param
 import ValueParameterUnitTemperature from '../value-parameter-unit-temperature/value-parameter-unit-temperature';
 
 export interface TemperatureParametersProps {
-  setParameterStringValue: (psv: string) => void;
+  setWeatherParameterStringValue: (psv: string) => void;
 }
 
 export function TemperatureParameters(props: TemperatureParametersProps) {
-  const { setParameterStringValue } = props;
+  const { setWeatherParameterStringValue } = props;
   const [parameterStringValueTemperature, setParameterStringValueTemperature] =
     useState<string>('');
   //"t_min_2m_1h:C"
@@ -25,8 +25,8 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
   const [unitTemperatureVP, setUnitTemperatureVP] = useState<string>('');
 
   useEffect(() => {
-    setParameterStringValue(parameterStringValueTemperature);
-  }, [setParameterStringValue, parameterStringValueTemperature]);
+    setWeatherParameterStringValue(parameterStringValueTemperature);
+  }, [setWeatherParameterStringValue, parameterStringValueTemperature]);
 
   useEffect(() => {
     setParameterStringValueTemperature(

@@ -21,7 +21,7 @@ export function App() {
   const [endDate, setEndDate] = useState(new Date(0));
   const [latitude, setLatitude] = useState(0.0);
   const [longitude, setLongitude] = useState(0.0);
-  const [parameterStringValue, setParameterStringValue] = useState<string>('');
+  const [weatherParameterStringValue, setWeatherParameterStringValue] = useState<string>('');
   const [addressComponents, setAddressComponents] = useState<
     IAddressComponent[] | []
   >([]);
@@ -53,9 +53,9 @@ export function App() {
         onChangeAddressComponents={onChangeAddressComponents}
         setStartDate={setStartDate}
         setEndDate={setEndDate}
-        setParameterStringValue={setParameterStringValue}
+        setWeatherParameterStringValue={setWeatherParameterStringValue}
       ></MenuSteps>
-      <p className="m-0">{parameterStringValue}</p>
+      <p className="m-0">{weatherParameterStringValue}</p>
       {/* <Banner text="Hello World!"></Banner>
 
       <ul>
