@@ -4,15 +4,17 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
+import { Toast } from 'primereact/toast';
 import {
   exampleMeteomaticsAPI,
   IKeyValueMap,
   IMeteomaticsAPIDateValue,
 } from '@fedevela-vntr-case/api';
 import { DisplayGraph, MenuSteps } from '@fedevela-vntr-case/common-ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function App() {
+  const toast = useRef(null);
   const [graphIntervalType, setGraphIntervalType] = useState('1h');
   const [graphPlotType, setGraphPlotType] = useState('heatmap');
   const [startDate, setStartDate] = useState(new Date(0));
@@ -32,41 +34,44 @@ export function App() {
   const onChangeAddressComponents = (acs: IKeyValueMap[]) =>
     setAddressComponents([...acs]);
 
-  useEffect(() => {
-    console.log(`latitude : ${latitude}`);
-  }, [latitude]);
-  useEffect(() => {
-    console.log(`longitude : ${longitude}`);
-  }, [longitude]);
-  useEffect(() => {
-    console.log(`addressComponents : ${JSON.stringify(addressComponents)}`);
-  }, [addressComponents]);
-  useEffect(() => {
-    console.log(`startDate : ${startDate.toUTCString()}`);
-  }, [startDate]);
-  useEffect(() => {
-    console.log(`endDate : ${endDate.toUTCString()}`);
-  }, [endDate]);
-  useEffect(() => {
-    console.log(`endDate : ${endDate.toUTCString()}`);
-  }, [endDate]);
-  useEffect(() => {
-    console.log(`result : `);
-    console.log(resultMeteomaticsAPIRaw);
-  }, [resultMeteomaticsAPIRaw]);
-  useEffect(() => {
-    console.log(`graphIntervalType : ${graphIntervalType}`);
-  }, [graphIntervalType]);
-  useEffect(() => {
-    console.log(`graphPlotType : ${graphPlotType}`);
-  }, [graphPlotType]);
+  // useEffect(() => {
+  //   console.log(`latitude : ${latitude}`);
+  // }, [latitude]);
+  // useEffect(() => {
+  //   console.log(`longitude : ${longitude}`);
+  // }, [longitude]);
+  // useEffect(() => {
+  //   console.log(`addressComponents : ${JSON.stringify(addressComponents)}`);
+  // }, [addressComponents]);
+  // useEffect(() => {
+  //   console.log(`startDate : ${startDate.toUTCString()}`);
+  // }, [startDate]);
+  // useEffect(() => {
+  //   console.log(`endDate : ${endDate.toUTCString()}`);
+  // }, [endDate]);
+  // useEffect(() => {
+  //   console.log(`endDate : ${endDate.toUTCString()}`);
+  // }, [endDate]);
+  // useEffect(() => {
+  //   console.log(`result : `);
+  //   console.log(resultMeteomaticsAPIRaw);
+  // }, [resultMeteomaticsAPIRaw]);
+  // useEffect(() => {
+  //   console.log(`graphIntervalType : ${graphIntervalType}`);
+  // }, [graphIntervalType]);
+  // useEffect(() => {
+  //   console.log(`graphPlotType : ${graphPlotType}`);
+  // }, [graphPlotType]);
 
   return (
     <>
+      <Toast ref={toast} />
       <MenuSteps
         setLatitude={setLatitude}
         setLongitude={setLongitude}
         onChangeAddressComponents={onChangeAddressComponents}
+        addressComponents={addressComponents}
+        toast={toast}
         setStartDate={setStartDate}
         setEndDate={setEndDate}
         setWeatherParameterStringValue={setWeatherParameterStringValue}

@@ -4,7 +4,6 @@ import styles from './menu-steps.module.css';
 import { useState, useRef } from 'react';
 
 import { Steps } from 'primereact/steps';
-import { Toast } from 'primereact/toast';
 import { MenuItem } from 'primereact/menuitem';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -27,6 +26,8 @@ export interface MenuStepsProps {
   onChangeAddressComponents: (acs: IKeyValueMap[]) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
+  addressComponents: IKeyValueMap[];
+  toast: any;
 }
 
 export function MenuSteps(props: MenuStepsProps) {
@@ -39,13 +40,14 @@ export function MenuSteps(props: MenuStepsProps) {
     setWeatherParameterStringValue,
     setGraphIntervalType,
     setGraphPlotType,
+    addressComponents,
+    toast,
   } = props;
   const [shouldDisableNextButton, setShouldDisableNextButton] =
     useState<boolean>(true);
   const [shouldDisableGraphButton, setShouldDisableGraphButton] =
     useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const toast = useRef(null);
   const items: MenuItem = [
     {
       label: 'Location',
@@ -70,7 +72,6 @@ export function MenuSteps(props: MenuStepsProps) {
   ];
   return (
     <div className={styles['container']}>
-      <Toast ref={toast} />
       <Steps
         model={items}
         activeIndex={activeIndex}
@@ -88,6 +89,8 @@ export function MenuSteps(props: MenuStepsProps) {
                   setLongitude={setLongitude}
                   onChangeAddressComponents={onChangeAddressComponents}
                   setShouldDisableNextButton={setShouldDisableNextButton}
+                  addressComponents={addressComponents}
+                  toast={toast}
                 />
               );
             case 1:

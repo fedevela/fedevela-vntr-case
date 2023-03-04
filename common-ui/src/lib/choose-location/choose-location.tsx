@@ -1,5 +1,6 @@
 import styles from './choose-location.module.css';
 import { useRef, useEffect } from 'react';
+import { Divider } from 'primereact/divider';
 import { IKeyValueMap } from '@fedevela-vntr-case/api';
 
 export interface ChooseLocationProps {
@@ -7,6 +8,8 @@ export interface ChooseLocationProps {
   setShouldDisableNextButton: (sdnb: boolean) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
+  addressComponents: IKeyValueMap[];
+  toast: any;
 }
 
 export function ChooseLocation(props: ChooseLocationProps) {
@@ -15,6 +18,8 @@ export function ChooseLocation(props: ChooseLocationProps) {
     setLongitude,
     onChangeAddressComponents,
     setShouldDisableNextButton,
+    addressComponents,
+    toast,
   } = props;
   const autoCompleteRef = useRef(null);
   const inputRef = useRef(null);
@@ -42,8 +47,19 @@ export function ChooseLocation(props: ChooseLocationProps) {
       );
       onChangeAddressComponents(addressComponents);
       setShouldDisableNextButton(false);
+      toast.current.show({
+        severity: 'info',
+        summary: 'Location chosen!',
+        detail: `Latitude: ${place.geometry.location.lat()} - Longitude: ${place.geometry.location.lng()}`,
+      });
     });
-  }, [setLatitude, setLongitude]);
+  }, [
+    setLatitude,
+    setLongitude,
+    onChangeAddressComponents,
+    setShouldDisableNextButton,
+    toast,
+  ]);
 
   return (
     <div className={styles['container']}>
@@ -51,6 +67,18 @@ export function ChooseLocation(props: ChooseLocationProps) {
         <label>Choose Location:</label>
         <input ref={inputRef} />
       </div>
+      {addressComponents.length > 0 && (
+        <>
+          <Divider />
+          <div className="field">
+            <label>Chosen Location:</label>
+            {addressComponents.reduce(
+              (acc, val) => acc + ' ' + Object.values(val)[0],
+              ''
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
