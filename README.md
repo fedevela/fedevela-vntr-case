@@ -1,12 +1,31 @@
 # Federico Vela submission for Case: Data Visualization App for Weather Data
 
+## Running the application locally
+
+1. Clone the application, this can be done with `gh`:
+```
+gh repo clone fedevela/fedevela-vntr-case
+```
+2. Execute `npm install`:
+```
+npm install
+```
+2. Install the NX command line:
+```
+npm install -g nx
+```
+3. Launch the application
+```
+nx serve fedevela-vntr-case
+```
+
 ## The architecture of the application
 
 The application is built as an NX monorepo, containing three modules:
 
-1. The single page React application, in `/src` .
-2. The React components library, in `/common-ui` .
-3. The Meteomatics API data access library, in `/api` .
+1. The single page React application, in `/src`.
+2. The React components library, in `/common-ui`.
+3. The Meteomatics API data access library, in `/api`.
 
 ### Single Page Application
 
