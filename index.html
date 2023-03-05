@@ -7,9 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/src/styles.css" />
+    <script>
+      window.initMap = function () {
+        console.log('Google maps initialized!');
+      };
+    </script>
+
     <script
       async
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJGBtlgRCczvv-MTLKip6RYcbXhZ_Z-6c&libraries=places"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJGBtlgRCczvv-MTLKip6RYcbXhZ_Z-6c&libraries=places&callback=initMap"
     ></script>
   </head>
   <body>

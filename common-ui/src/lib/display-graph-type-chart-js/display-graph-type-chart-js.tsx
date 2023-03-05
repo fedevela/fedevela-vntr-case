@@ -61,9 +61,6 @@ export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
           labels: chartLabels,
           datasets: chartDatasets,
         }}
-        options={{
-          responsive: false,
-        }}
       />
     </div>
   );
