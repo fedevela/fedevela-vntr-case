@@ -41,10 +41,14 @@ export function DisplayGraph(props: DisplayGraphProps) {
               </div>
             );
           case 'line':
+          case 'bar':
             return (
               <div className={styles['container']}>
                 <Card>
-                  <DisplayGraphTypeChartJS graphDataPoints={graphDataPoints} />
+                  <DisplayGraphTypeChartJS
+                    graphDataPoints={graphDataPoints}
+                    graphPlotType={graphPlotType}
+                  />
                 </Card>
               </div>
             );

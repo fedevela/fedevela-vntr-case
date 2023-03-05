@@ -9,6 +9,7 @@ import { createArray24HLabels, IGraphDataPoint } from '../common-ui';
 
 export interface DisplayGraphTypeChartJSProps {
   graphDataPoints: IGraphDataPoint[];
+  graphPlotType: string;
 }
 
 export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
@@ -26,7 +27,7 @@ export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
     colorPalette.palette.primary['900'],
   ];
 
-  const { graphDataPoints } = props;
+  const { graphDataPoints, graphPlotType } = props;
   const chartLabels = createArray24HLabels();
 
   const gdpGroupedByYMD: IGroupedValuesMap = {};
@@ -47,6 +48,7 @@ export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
           data: gdpGroupedByYMD[ymdKey],
           fill: false,
           borderColor: colorArray[index % 10],
+          backgroundColor: colorArray[index % 10],
           tension: 0.4,
         };
       })
@@ -56,7 +58,7 @@ export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
   return (
     <div className="card">
       <Chart
-        type="line"
+        type={graphPlotType}
         data={{
           labels: chartLabels,
           datasets: chartDatasets,
