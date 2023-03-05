@@ -1,10 +1,8 @@
 import axios from 'axios';
 import mockMeteomaticsData from './api.mock.json';
 
-export const INTERVAL_24H = '24h';
 export const INTERVAL_1H = '1h';
 export const INTERVAL_P_1H = 'PT1H';
-export const INTERVAL_P_24H = 'P1D';
 
 const axiosInstance = axios.create({
   headers: {
@@ -22,21 +20,19 @@ const axiosInstance = axios.create({
 export const buildWeatherParameterStringTemperature = (
   measureMMMVP: string,
   levelMetersVP: string,
-  intervalHDVP: string,
   unitTemperatureVP: string
-) => `t_${measureMMMVP}_${levelMetersVP}m_${intervalHDVP}:${unitTemperatureVP}`;
+) => `t_${measureMMMVP}_${levelMetersVP}m_${INTERVAL_1H}:${unitTemperatureVP}`;
 
 export const exampleMeteomaticsAPI = () => mockMeteomaticsData;
 
 export const buildMeteomaticsURL = (
   startTime: string,
   endTime: string,
-  dateInterval: string,
   weatherParameter: string,
   latitude: string,
   longitude: string
 ) =>
-  `https://corsproxy.io/?https://api.meteomatics.com/${startTime}--${endTime}:${dateInterval}/${weatherParameter}/${latitude},${longitude}/json?model=mix`;
+  `https://corsproxy.io/?https://api.meteomatics.com/${startTime}--${endTime}:${INTERVAL_P_1H}/${weatherParameter}/${latitude},${longitude}/json?model=mix`;
 
 export const executeRequestMeteomaticsAPI = async (meteomaticsURL: string) =>
   Promise.resolve(axiosInstance.post(meteomaticsURL));

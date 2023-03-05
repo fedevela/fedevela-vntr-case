@@ -8,9 +8,6 @@ import { Toast } from 'primereact/toast';
 import {
   buildMeteomaticsURL,
   executeRequestMeteomaticsAPI,
-  INTERVAL_1H,
-  INTERVAL_P_1H,
-  INTERVAL_P_24H,
 } from '@fedevela-vntr-case/api';
 import {
   IMeteomaticsAPIDateValue,
@@ -26,7 +23,6 @@ export function App() {
   const [shouldDisplayGraph, setShouldDisplayGraph] = useState(false);
   const [shouldRefreshGraph, setShouldRefreshGraph] = useState(false);
   const [weatherParameterLabel, setWeatherParameterLabel] = useState('');
-  const [graphIntervalType, setGraphIntervalType] = useState('');
   const [graphPlotType, setGraphPlotType] = useState('');
   const [startDate, setStartDate] = useState(DATE_ZERO);
   const [endDate, setEndDate] = useState(DATE_ZERO);
@@ -49,7 +45,6 @@ export function App() {
       const meteomaticsURL = buildMeteomaticsURL(
         startDate.toISOString(),
         endDate.toISOString(),
-        graphIntervalType === INTERVAL_1H ? INTERVAL_P_1H : INTERVAL_P_24H,
         weatherParameterStringValue,
         latitude.toLocaleString('en-US', { maximumFractionDigits: 5 }),
         longitude.toLocaleString('en-US', { maximumFractionDigits: 5 })
@@ -75,7 +70,6 @@ export function App() {
     }
   }, [
     endDate,
-    graphIntervalType,
     latitude,
     longitude,
     startDate,
@@ -98,7 +92,6 @@ export function App() {
         startDate={startDate}
         endDate={endDate}
         setWeatherParameterStringValue={setWeatherParameterStringValue}
-        setGraphIntervalType={setGraphIntervalType}
         setGraphPlotType={setGraphPlotType}
         weatherParameterLabel={weatherParameterLabel}
         setWeatherParameterLabel={setWeatherParameterLabel}
