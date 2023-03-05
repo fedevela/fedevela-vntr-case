@@ -1,19 +1,22 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './choose-weather-parameters.module.css';
-import { useState } from 'react';
 
-import { PrimeIcons } from 'primereact/api';
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 import { Divider } from 'primereact/divider';
 
-import TemperatureParameters from '../parameters-temperature/parameters-temperature';
-import { IKeyValueMap, IListBoxItem, itemTemplateWithIcon } from '../common-ui';
+import ParametersTemperature from '../parameters-temperature/parameters-temperature';
+import {
+  weatherParametersKV,
+  IListBoxItem,
+  itemTemplateWithIcon,
+} from '../common-ui';
+import ParametersWindSpeed from '../parameters-wind-speed/parameters-wind-speed';
 
 export interface ChooseWeatherParametersProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
-  setWeatherParameterLabel: (git: string) => void;
-  weatherParameterLabel: string;
+  setWeatherParameterCode: (git: string) => void;
+  weatherParameterCode: string;
   shouldDisableNextButton: boolean;
   toast: any;
 }
@@ -22,35 +25,11 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
   const {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
-    setWeatherParameterLabel,
+    setWeatherParameterCode,
+    weatherParameterCode,
     shouldDisableNextButton,
-    weatherParameterLabel,
     toast,
   } = props;
-  const [weatherParameterCode, setWeatherParameterCode] = useState<string>('');
-
-  const weatherParametersKV: IKeyValueMap = {
-    temperature: {
-      name: 'Temperature',
-      code: 'temperature',
-      icon: PrimeIcons.SUN,
-    },
-    precipitation: {
-      name: 'Precipitation',
-      code: 'precipitation',
-      icon: PrimeIcons.CLOUD_DOWNLOAD,
-    },
-    wind_speed: {
-      name: 'Wind Speed',
-      code: 'wind_speed',
-      icon: PrimeIcons.IMAGE,
-    },
-    relative_humidity: {
-      name: 'Relative Humidity',
-      code: 'relative_humidity',
-      icon: PrimeIcons.SORT_ALT,
-    },
-  };
 
   const availableWeatherParameterTypes: IListBoxItem[] = [
     ...Object.values(weatherParametersKV),
@@ -64,7 +43,6 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
         value={weatherParameterCode}
         onChange={(e: SelectButtonChangeEvent) => {
           setWeatherParameterCode(e.value);
-          setWeatherParameterLabel(weatherParametersKV[e.value].name);
           toast.current.show({
             severity: 'success',
             summary: 'Weather Parameter Chosen!',
@@ -83,7 +61,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
             return (
               <>
                 <Divider />
-                <TemperatureParameters
+                <ParametersTemperature
                   setWeatherParameterStringValue={
                     setWeatherParameterStringValue
                   }
@@ -96,7 +74,19 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
           case weatherParametersKV.precipitation.code:
             return <div>precipitation</div>;
           case weatherParametersKV.wind_speed.code:
-            return <div>wind_speed</div>;
+            return (
+              <>
+                <Divider />
+                <ParametersWindSpeed
+                  setWeatherParameterStringValue={
+                    setWeatherParameterStringValue
+                  }
+                  setShouldDisableNextButton={setShouldDisableNextButton}
+                  shouldDisableNextButton={shouldDisableNextButton}
+                  toast={toast}
+                />
+              </>
+            );
           case weatherParametersKV.relative_humidity.code:
             return <div>relative_humidity</div>;
         }

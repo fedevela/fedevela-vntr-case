@@ -11,14 +11,14 @@ import ValueParameterLevelMeters from '../value-parameter-level-meters/value-par
 import ValueParameterMeasureMMM from '../value-parameter-measure-mmm/value-parameter-measure-mmm';
 import ValueParameterUnitTemperature from '../value-parameter-unit-temperature/value-parameter-unit-temperature';
 
-export interface TemperatureParametersProps {
+export interface ParametersTemperatureProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
   shouldDisableNextButton: boolean;
   toast: any;
 }
 
-export function TemperatureParameters(props: TemperatureParametersProps) {
+export function ParametersTemperature(props: ParametersTemperatureProps) {
   const {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
@@ -60,6 +60,7 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
   }, [
     setParameterStringValueTemperature,
     setShouldDisableNextButton,
+    shouldDisableNextButton,
     levelMetersVP,
     measureMMMVP,
     unitTemperatureVP,
@@ -81,4 +82,4 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
   );
 }
 
-export default TemperatureParameters;
+export default ParametersTemperature;

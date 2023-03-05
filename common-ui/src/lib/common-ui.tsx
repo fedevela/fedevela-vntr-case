@@ -1,3 +1,5 @@
+import { PrimeIcons } from 'primereact/api';
+
 export const LEVEL_METERS_MIN = 2;
 export const LEVEL_METERS_MAX = 20000;
 export const DATE_ZERO = new Date(0);
@@ -49,4 +51,27 @@ export const itemTemplateWithIcon = (option: IListBoxItem) => {
       <span>&nbsp;{option.name}</span>
     </>
   );
+};
+
+export const weatherParametersKV: IKeyValueMap = {
+  temperature: {
+    name: 'Temperature',
+    code: 'temperature',
+    icon: PrimeIcons.SUN,
+  },
+  precipitation: {
+    name: 'Precipitation',
+    code: 'precipitation',
+    icon: PrimeIcons.CLOUD_DOWNLOAD,
+  },
+  wind_speed: {
+    name: 'Wind Speed',
+    code: 'wind_speed',
+    icon: PrimeIcons.IMAGE,
+  },
+  relative_humidity: {
+    name: 'Relative Humidity',
+    code: 'relative_humidity',
+    icon: PrimeIcons.SORT_ALT,
+  },
 };

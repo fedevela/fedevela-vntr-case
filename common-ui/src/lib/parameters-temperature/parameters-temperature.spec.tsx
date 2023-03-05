@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import TemperatureParameters from './parameters-temperature';
+import ParametersTemperature from './parameters-temperature';
 
-describe('TemperatureParameters', () => {
+describe('ParametersTemperature', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<TemperatureParameters />);
+    const { baseElement } = render(<ParametersTemperature />);
     expect(baseElement).toBeTruthy();
   });
 });

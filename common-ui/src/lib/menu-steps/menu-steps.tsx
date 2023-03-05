@@ -25,10 +25,10 @@ export interface MenuStepsProps {
   onChangeAddressComponents: (acs: IKeyValueMap[]) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
-  setWeatherParameterLabel: (git: string) => void;
+  setWeatherParameterCode: (git: string) => void;
   setShouldDisplayGraph: (ssdg: boolean) => void;
   setShouldRefreshGraph: (ssrg: boolean) => void;
-  weatherParameterLabel: string;
+  weatherParameterCode: string;
   addressComponents: IKeyValueMap[];
   toast: any;
   startDate: Date;
@@ -44,10 +44,10 @@ export function MenuSteps(props: MenuStepsProps) {
     setEndDate,
     setWeatherParameterStringValue,
     setGraphPlotType,
-    setWeatherParameterLabel,
+    setWeatherParameterCode,
     setShouldDisplayGraph,
     setShouldRefreshGraph,
-    weatherParameterLabel,
+    weatherParameterCode,
     addressComponents,
     toast,
     startDate,
@@ -126,8 +126,8 @@ export function MenuSteps(props: MenuStepsProps) {
                   }
                   setShouldDisableNextButton={setShouldDisableNextButton}
                   shouldDisableNextButton={shouldDisableNextButton}
-                  weatherParameterLabel={weatherParameterLabel}
-                  setWeatherParameterLabel={setWeatherParameterLabel}
+                  setWeatherParameterCode={setWeatherParameterCode}
+                  weatherParameterCode={weatherParameterCode}
                   toast={toast}
                 />
               );

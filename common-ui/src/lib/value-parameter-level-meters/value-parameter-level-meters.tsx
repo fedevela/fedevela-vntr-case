@@ -17,7 +17,7 @@ export function ValueParameterLevelMeters(
 
   return (
     <div className="field">
-      <label>Level (Meters): {valueLevelMeters} m</label>
+      <label>Height (Meters): {valueLevelMeters} m</label>
       <Slider
         value={valueLevelMeters}
         onChange={(e: SliderChangeEvent) => setValueLevelMeters(e.value)}

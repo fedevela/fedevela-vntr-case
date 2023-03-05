@@ -1,3 +1,5 @@
+export * from './lib/value-parameter-unit-speed/value-parameter-unit-speed';
+export * from './lib/parameters-wind-speed/parameters-wind-speed';
 export * from './lib/display-graph-type-chart-js/display-graph-type-chart-js';
 export * from './lib/display-graph-type-heatmap/display-graph-type-heatmap';
 export * from './lib/display-graph/display-graph';

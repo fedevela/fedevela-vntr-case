@@ -23,6 +23,11 @@ export const buildWeatherParameterStringTemperature = (
   unitTemperatureVP: string
 ) => `t_${measureMMMVP}_${levelMetersVP}m_${INTERVAL_1H}:${unitTemperatureVP}`;
 
+export const buildWeatherParameterStringSpeed = (
+  levelMetersVP: string,
+  unitSpeedVP: string
+) => `wind_speed_mean_${levelMetersVP}m_${INTERVAL_1H}:${unitSpeedVP}`;
+
 export const exampleMeteomaticsAPI = () => mockMeteomaticsData;
 
 export const buildMeteomaticsURL = (

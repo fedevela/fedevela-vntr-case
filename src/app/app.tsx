@@ -22,7 +22,7 @@ export function App() {
   const toast = useRef(null);
   const [shouldDisplayGraph, setShouldDisplayGraph] = useState(false);
   const [shouldRefreshGraph, setShouldRefreshGraph] = useState(false);
-  const [weatherParameterLabel, setWeatherParameterLabel] = useState('');
+  const [weatherParameterCode, setWeatherParameterCode] = useState('');
   const [graphPlotType, setGraphPlotType] = useState('');
   const [startDate, setStartDate] = useState(DATE_ZERO);
   const [endDate, setEndDate] = useState(DATE_ZERO);
@@ -88,6 +88,7 @@ export function App() {
   return (
     <>
       <Toast ref={toast} position="bottom-left" />
+      <div>{weatherParameterStringValue}</div>
       <MenuSteps
         setLatitude={setLatitude}
         setLongitude={setLongitude}
@@ -100,8 +101,8 @@ export function App() {
         endDate={endDate}
         setWeatherParameterStringValue={setWeatherParameterStringValue}
         setGraphPlotType={setGraphPlotType}
-        weatherParameterLabel={weatherParameterLabel}
-        setWeatherParameterLabel={setWeatherParameterLabel}
+        setWeatherParameterCode={setWeatherParameterCode}
+        weatherParameterCode={weatherParameterCode}
         setShouldDisplayGraph={setShouldDisplayGraph}
         setShouldRefreshGraph={setShouldRefreshGraph}
       />

@@ -1,8 +1,9 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './value-parameter-unit-temperature.module.css';
 import { useEffect, useState } from 'react';
-import { IListBoxItem, IValueParameterProps } from '../common-ui';
+
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
+import { IListBoxItem, IValueParameterProps } from '../common-ui';
 
 export function ValueParameterUnitTemperature(props: IValueParameterProps) {
   const { setValueParameter } = props;
