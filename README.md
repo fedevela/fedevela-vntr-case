@@ -48,7 +48,7 @@ The components are:
 - `choose-graph-plot-type` - **Navigation : Fourth Step** : provides the user with the different available chart types to later visualize the data received from the API.
 - `parameters-temperature` - **Configuration of Temperature** : provides the user with the capacity to configure how temperature will be queried and displayed.
 - `parameters-relative-humidity` - **Configuration of Relative Humidity** : provides the user with the capacity to configure how relative humidity will be queried and displayed.
-- `parameters-wind-speed` - **Configuration of Relative Humidity** : provides the user with the capacity to configure how wind speed will be queried and displayed.
+- `parameters-wind-speed` - **Configuration of Wind Speed** : provides the user with the capacity to configure how wind speed will be queried and displayed.
 - `value-parameter-unit-speed` - **Selection of Unit of Speed** : user can select between different units of speed.
 - `value-parameter-level-meters` - **Selection of Height** : user can select the height (sometimes called 'level') that will be queried.
 - `value-parameter-unit-temperature` - **Selection of Unit of Temperature** : user can select between different units of temperature.
