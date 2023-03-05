@@ -1,5 +1,4 @@
 import axios from 'axios';
-import mockMeteomaticsData from './api.mock.json';
 
 export const INTERVAL_1H = '1h';
 export const INTERVAL_P_1H = 'PT1H';
@@ -30,8 +29,6 @@ export const buildWeatherParameterStringRelativeHumidity = (
   measureMMMVP: string,
   levelMetersVP: string
 ) => `relative_humidity_${measureMMMVP}_${levelMetersVP}m_${INTERVAL_1H}:p`;
-
-export const exampleMeteomaticsAPI = () => mockMeteomaticsData;
 
 export const buildMeteomaticsURL = (
   startTime: string,
