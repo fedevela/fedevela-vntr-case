@@ -9,11 +9,9 @@ import { buildWeatherParameterStringTemperature } from '@fedevela-vntr-case/api'
 
 import ValueParameterLevelMeters from '../value-parameter-level-meters/value-parameter-level-meters';
 import ValueParameterMeasureMMM from '../value-parameter-measure-mmm/value-parameter-measure-mmm';
-import ValueParameterIntervalHD from '../value-parameter-interval-hd/value-parameter-interval-hd';
 import ValueParameterUnitTemperature from '../value-parameter-unit-temperature/value-parameter-unit-temperature';
 
 export interface TemperatureParametersProps {
-  setGraphIntervalType: (git: string) => void;
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
   toast: any;
@@ -23,7 +21,6 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
   const {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
-    setGraphIntervalType,
     toast,
   } = props;
   const [parameterStringValueTemperature, setParameterStringValueTemperature] =
@@ -31,7 +28,6 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
   //"t_min_2m_1h:C"
   const [levelMetersVP, setLevelMetersVP] = useState<string>('');
   const [measureMMMVP, setMeasureMMMVP] = useState<string>('');
-  const [intervalHDVP, setIntervalHDVP] = useState<string>('');
   const [unitTemperatureVP, setUnitTemperatureVP] = useState<string>('');
 
   useEffect(() => {
@@ -42,14 +38,12 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     if (
       levelMetersVP !== '' &&
       measureMMMVP !== '' &&
-      intervalHDVP !== '' &&
       unitTemperatureVP !== ''
     ) {
       setParameterStringValueTemperature(
         buildWeatherParameterStringTemperature(
           measureMMMVP,
           levelMetersVP,
-          intervalHDVP,
           unitTemperatureVP
         )
       );
@@ -65,14 +59,9 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     setShouldDisableNextButton,
     levelMetersVP,
     measureMMMVP,
-    intervalHDVP,
     unitTemperatureVP,
     toast,
   ]);
-
-  useEffect(() => {
-    setGraphIntervalType(intervalHDVP);
-  }, [setGraphIntervalType, intervalHDVP]);
 
   return (
     <div className={styles['container']}>
@@ -80,8 +69,6 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
         <ValueParameterLevelMeters setValueParameter={setLevelMetersVP} />
         <Divider />
         <ValueParameterMeasureMMM setValueParameter={setMeasureMMMVP} />
-        <Divider />
-        <ValueParameterIntervalHD setValueParameter={setIntervalHDVP} />
         <Divider />
         <ValueParameterUnitTemperature
           setValueParameter={setUnitTemperatureVP}

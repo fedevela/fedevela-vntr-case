@@ -19,7 +19,6 @@ import { IKeyValueMap } from '../common-ui';
 
 export interface MenuStepsProps {
   setGraphPlotType: (gpt: string) => void;
-  setGraphIntervalType: (git: string) => void;
   setWeatherParameterStringValue: (psv: string) => void;
   setStartDate: (sd: Date) => void;
   setEndDate: (ed: Date) => void;
@@ -44,7 +43,6 @@ export function MenuSteps(props: MenuStepsProps) {
     setStartDate,
     setEndDate,
     setWeatherParameterStringValue,
-    setGraphIntervalType,
     setGraphPlotType,
     setWeatherParameterLabel,
     setShouldDisplayGraph,
@@ -127,7 +125,6 @@ export function MenuSteps(props: MenuStepsProps) {
                     setWeatherParameterStringValue
                   }
                   setShouldDisableNextButton={setShouldDisableNextButton}
-                  setGraphIntervalType={setGraphIntervalType}
                   weatherParameterLabel={weatherParameterLabel}
                   setWeatherParameterLabel={setWeatherParameterLabel}
                   toast={toast}
