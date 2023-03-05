@@ -59,11 +59,6 @@ export const weatherParametersKV: IKeyValueMap = {
     code: 'temperature',
     icon: PrimeIcons.SUN,
   },
-  precipitation: {
-    name: 'Precipitation',
-    code: 'precipitation',
-    icon: PrimeIcons.CLOUD_DOWNLOAD,
-  },
   wind_speed: {
     name: 'Wind Speed',
     code: 'wind_speed',

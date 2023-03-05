@@ -11,6 +11,7 @@ import {
   itemTemplateWithIcon,
 } from '../common-ui';
 import ParametersWindSpeed from '../parameters-wind-speed/parameters-wind-speed';
+import ParametersRelativeHumidity from '../parameters-relative-humidity/parameters-relative-humidity';
 
 export interface ChooseWeatherParametersProps {
   setWeatherParameterStringValue: (psv: string) => void;
@@ -71,8 +72,6 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
                 />
               </>
             );
-          case weatherParametersKV.precipitation.code:
-            return <div>precipitation</div>;
           case weatherParametersKV.wind_speed.code:
             return (
               <>
@@ -88,7 +87,19 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
               </>
             );
           case weatherParametersKV.relative_humidity.code:
-            return <div>relative_humidity</div>;
+            return (
+              <>
+                <Divider />
+                <ParametersRelativeHumidity
+                  setWeatherParameterStringValue={
+                    setWeatherParameterStringValue
+                  }
+                  setShouldDisableNextButton={setShouldDisableNextButton}
+                  shouldDisableNextButton={shouldDisableNextButton}
+                  toast={toast}
+                />
+              </>
+            );
         }
       })()}
     </div>

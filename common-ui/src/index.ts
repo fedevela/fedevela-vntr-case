@@ -1,3 +1,4 @@
+export * from './lib/parameters-relative-humidity/parameters-relative-humidity';
 export * from './lib/value-parameter-unit-speed/value-parameter-unit-speed';
 export * from './lib/parameters-wind-speed/parameters-wind-speed';
 export * from './lib/display-graph-type-chart-js/display-graph-type-chart-js';

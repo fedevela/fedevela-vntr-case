@@ -88,7 +88,6 @@ export function App() {
   return (
     <>
       <Toast ref={toast} position="bottom-left" />
-      <div>{weatherParameterStringValue}</div>
       <MenuSteps
         setLatitude={setLatitude}
         setLongitude={setLongitude}

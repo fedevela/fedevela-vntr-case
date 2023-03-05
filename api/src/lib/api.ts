@@ -6,10 +6,8 @@ export const INTERVAL_P_1H = 'PT1H';
 
 const axiosInstance = axios.create({
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Credentials': false,
+    'Content-Type': 'application/json',
   },
-  withCredentials: false,
   auth: {
     username: 'personal_vela',
     password: 'G8boayH5F6',
@@ -27,6 +25,11 @@ export const buildWeatherParameterStringSpeed = (
   levelMetersVP: string,
   unitSpeedVP: string
 ) => `wind_speed_mean_${levelMetersVP}m_${INTERVAL_1H}:${unitSpeedVP}`;
+
+export const buildWeatherParameterStringRelativeHumidity = (
+  measureMMMVP: string,
+  levelMetersVP: string
+) => `relative_humidity_${measureMMMVP}_${levelMetersVP}m_${INTERVAL_1H}:p`;
 
 export const exampleMeteomaticsAPI = () => mockMeteomaticsData;
 
