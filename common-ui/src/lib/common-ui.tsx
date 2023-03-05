@@ -24,7 +24,7 @@ export interface IGraphDataPoint {
 }
 
 export interface IKeyValueMap {
-  [key: string]: string;
+  [key: string]: any;
 }
 
 export interface IGroupedValuesMap {
@@ -40,4 +40,13 @@ export const checkDateIsNotZero = (aDate: Date) =>
 
 export const createArray24HLabels = () => {
   return new Array(24).fill(0).map((_, i) => `${i}h`);
+};
+
+export const itemTemplateWithIcon = (option: IListBoxItem) => {
+  return (
+    <>
+      <i className={option.icon}></i>
+      <span>&nbsp;{option.name}</span>
+    </>
+  );
 };

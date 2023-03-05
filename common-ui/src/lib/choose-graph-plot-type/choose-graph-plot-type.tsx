@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 import { PrimeIcons } from 'primereact/api';
 
-import { IListBoxItem } from '../common-ui';
+import { IListBoxItem, itemTemplateWithIcon } from '../common-ui';
 
 export interface ChooseGraphPlotTypeProps {
   setGraphPlotType: (gpt: string) => void;
@@ -25,15 +25,6 @@ export function ChooseGraphPlotType(props: ChooseGraphPlotTypeProps) {
       setShouldDisableGraphButton(false);
     }
   }, [valueGraphPlotType, setGraphPlotType, setShouldDisableGraphButton]);
-
-  const itemTemplateWithIcon = (option: IListBoxItem) => {
-    return (
-      <>
-        <i className={option.icon}></i>
-        <span>&nbsp;{option.name}</span>
-      </>
-    );
-  };
 
   return (
     <div>

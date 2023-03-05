@@ -1,9 +1,13 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './choose-weather-parameters.module.css';
 import { useState } from 'react';
-import { Accordion, AccordionTab } from 'primereact/accordion';
+
+import { PrimeIcons } from 'primereact/api';
+import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
+import { Divider } from 'primereact/divider';
 
 import TemperatureParameters from '../parameters-temperature/parameters-temperature';
+import { IKeyValueMap, IListBoxItem, itemTemplateWithIcon } from '../common-ui';
 
 export interface ChooseWeatherParametersProps {
   setWeatherParameterStringValue: (psv: string) => void;
@@ -23,39 +27,80 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
     weatherParameterLabel,
     toast,
   } = props;
-  const [activeTabIndex, setActiveTabIndex] = useState<number>(-1);
+  const [weatherParameterCode, setWeatherParameterCode] = useState<string>('');
 
-  const weatherParameterLabels: string[] = ['Temperature'];
+  const weatherParametersKV: IKeyValueMap = {
+    temperature: {
+      name: 'Temperature',
+      code: 'temperature',
+      icon: PrimeIcons.SUN,
+    },
+    precipitation: {
+      name: 'Precipitation',
+      code: 'precipitation',
+      icon: PrimeIcons.CLOUD_DOWNLOAD,
+    },
+    wind_speed: {
+      name: 'Wind Speed',
+      code: 'wind_speed',
+      icon: PrimeIcons.IMAGE,
+    },
+    relative_humidity: {
+      name: 'Relative Humidity',
+      code: 'relative_humidity',
+      icon: PrimeIcons.SORT_ALT,
+    },
+  };
+
+  const availableWeatherParameterTypes: IListBoxItem[] = [
+    ...Object.values(weatherParametersKV),
+  ];
 
   return (
     <div className={styles['container']}>
-      {weatherParameterLabel.length === 0 ?
       <h3>Please choose the parameter you wish to see:</h3>
-      :
-      <h3>Please choose values for {weatherParameterLabel} parameter :</h3>
-      }
-      
-      <Accordion
-        activeIndex={activeTabIndex}
-        onTabChange={(e) => {
-          setActiveTabIndex(e.index);
-          setWeatherParameterLabel(weatherParameterLabels[e.index]);
+
+      <SelectButton
+        value={weatherParameterCode}
+        onChange={(e: SelectButtonChangeEvent) => {
+          setWeatherParameterCode(e.value);
+          setWeatherParameterLabel(weatherParametersKV[e.value].name);
           toast.current.show({
             severity: 'success',
             summary: 'Weather Parameter Chosen!',
-            detail: weatherParameterLabels[e.index],
+            detail: weatherParametersKV[e.value].name,
           });
         }}
-      >
-        <AccordionTab header={weatherParameterLabels[0]}>
-          <TemperatureParameters
-            setWeatherParameterStringValue={setWeatherParameterStringValue}
-            setShouldDisableNextButton={setShouldDisableNextButton}
-            shouldDisableNextButton={shouldDisableNextButton}
-            toast={toast}
-          />
-        </AccordionTab>
-      </Accordion>
+        options={availableWeatherParameterTypes}
+        itemTemplate={itemTemplateWithIcon}
+        optionLabel="name"
+        optionValue="code"
+        className="w-full"
+      />
+      {(() => {
+        switch (weatherParameterCode) {
+          case weatherParametersKV.temperature.code:
+            return (
+              <>
+                <Divider />
+                <TemperatureParameters
+                  setWeatherParameterStringValue={
+                    setWeatherParameterStringValue
+                  }
+                  setShouldDisableNextButton={setShouldDisableNextButton}
+                  shouldDisableNextButton={shouldDisableNextButton}
+                  toast={toast}
+                />
+              </>
+            );
+          case weatherParametersKV.precipitation.code:
+            return <div>precipitation</div>;
+          case weatherParametersKV.wind_speed.code:
+            return <div>wind_speed</div>;
+          case weatherParametersKV.relative_humidity.code:
+            return <div>relative_humidity</div>;
+        }
+      })()}
     </div>
   );
 }

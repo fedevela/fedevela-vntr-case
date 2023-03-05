@@ -46,8 +46,8 @@ export function App() {
         startDate.toISOString(),
         endDate.toISOString(),
         weatherParameterStringValue,
-        latitude.toLocaleString('en-US', { maximumFractionDigits: 5 }),
-        longitude.toLocaleString('en-US', { maximumFractionDigits: 5 })
+        latitude.toLocaleString('en-US', { maximumFractionDigits: 7 }),
+        longitude.toLocaleString('en-US', { maximumFractionDigits: 7 })
       );
 
       executeRequestMeteomaticsAPI(meteomaticsURL)
