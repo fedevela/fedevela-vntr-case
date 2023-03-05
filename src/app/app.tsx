@@ -108,6 +108,8 @@ export function App() {
       {shouldDisplayGraph && (
         <DisplayGraph
           meteomaticsAPIDateValues={meteomaticsAPIDateValues}
+          weatherParameterCode={weatherParameterCode}
+          locationName={Object.values(addressComponents[0])[0]}
           graphPlotType={graphPlotType}
         />
       )}

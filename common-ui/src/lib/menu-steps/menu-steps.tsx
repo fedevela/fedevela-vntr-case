@@ -89,6 +89,7 @@ export function MenuSteps(props: MenuStepsProps) {
         onSelect={(e) => {
           setActiveIndex(e.index);
           setShouldDisableGraphButton(true);
+          setShouldDisplayGraph(false);
         }}
         readOnly={false}
       />
@@ -146,8 +147,7 @@ export function MenuSteps(props: MenuStepsProps) {
         <Divider />
         <div className="formgrid grid">
           <div className="field col">
-            <div className="card flex justify-content-center">
-            </div>
+            <div className="card flex justify-content-center"></div>
           </div>
           <div className="field col">
             <div className="card flex justify-content-center">

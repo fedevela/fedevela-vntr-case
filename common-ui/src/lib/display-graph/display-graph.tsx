@@ -2,15 +2,26 @@ import styles from './display-graph.module.css';
 import { Card } from 'primereact/card';
 import DisplayGraphTypeHeatmap from '../display-graph-type-heatmap/display-graph-type-heatmap';
 import DisplayGraphTypeChartJS from '../display-graph-type-chart-js/display-graph-type-chart-js';
-import { IMeteomaticsAPIDateValue, IGraphDataPoint } from '../common-ui';
+import {
+  IMeteomaticsAPIDateValue,
+  IGraphDataPoint,
+  weatherParametersKV,
+} from '../common-ui';
 
 export interface DisplayGraphProps {
   graphPlotType: string;
+  weatherParameterCode: string;
+  locationName: string;
   meteomaticsAPIDateValues: IMeteomaticsAPIDateValue[];
 }
 
 export function DisplayGraph(props: DisplayGraphProps) {
-  const { graphPlotType, meteomaticsAPIDateValues } = props;
+  const {
+    graphPlotType,
+    meteomaticsAPIDateValues,
+    weatherParameterCode,
+    locationName,
+  } = props;
   const graphDataPoints: IGraphDataPoint[] = meteomaticsAPIDateValues.map(
     (madv) => {
       const dvDate = new Date(madv.date);
@@ -29,32 +40,29 @@ export function DisplayGraph(props: DisplayGraphProps) {
   );
 
   return (
-    <>
-      {(() => {
-        switch (graphPlotType) {
-          case 'heatmap':
-            return (
-              <div className={styles['container']}>
-                <Card>
-                  <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
-                </Card>
-              </div>
-            );
-          case 'line':
-          case 'bar':
-            return (
-              <div className={styles['container']}>
-                <Card>
-                  <DisplayGraphTypeChartJS
-                    graphDataPoints={graphDataPoints}
-                    graphPlotType={graphPlotType}
-                  />
-                </Card>
-              </div>
-            );
-        }
-      })()}
-    </>
+    <div className={styles['container']}>
+      <Card>
+        <h3>
+          {weatherParametersKV[weatherParameterCode].name} at {locationName}
+        </h3>
+        {(() => {
+          switch (graphPlotType) {
+            case 'heatmap':
+              return (
+                <DisplayGraphTypeHeatmap graphDataPoints={graphDataPoints} />
+              );
+            case 'line':
+            case 'bar':
+              return (
+                <DisplayGraphTypeChartJS
+                  graphDataPoints={graphDataPoints}
+                  graphPlotType={graphPlotType}
+                />
+              );
+          }
+        })()}
+      </Card>
+    </div>
   );
 }
 
