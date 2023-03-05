@@ -27,8 +27,6 @@ export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
   ];
 
   const { graphDataPoints } = props;
-  const [chartData, setChartData] = useState({});
-  const [chartOptions, setChartOptions] = useState({});
   const chartLabels = createArray24HLabels();
 
   const gdpGroupedByYMD: IGroupedValuesMap = {};
@@ -55,23 +53,18 @@ export function DisplayGraphTypeChartJS(props: DisplayGraphTypeChartJSProps) {
     ),
   ];
 
-  useEffect(() => {
-    const data = {
-      labels: chartLabels,
-      datasets: chartDatasets,
-    };
-    const options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.6,
-    };
-
-    setChartData(data);
-    setChartOptions(options);
-  }, []);
-
   return (
     <div className="card">
-      <Chart type="line" data={chartData} options={chartOptions} />
+      <Chart
+        type="line"
+        data={{
+          labels: chartLabels,
+          datasets: chartDatasets,
+        }}
+        options={{
+          responsive: false,
+        }}
+      />
     </div>
   );
 }
