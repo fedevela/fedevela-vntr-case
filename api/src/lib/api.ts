@@ -8,8 +8,10 @@ export const INTERVAL_P_24H = 'P1D';
 
 const axiosInstance = axios.create({
   baseURL: 'https://api.meteomatics.com/',
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  withCredentials: false,
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Access-Control-Allow-Credentials': true,
+  },
   auth: {
     username: 'personal_vela',
     password: 'G8boayH5F6',

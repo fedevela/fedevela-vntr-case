@@ -29,7 +29,7 @@ export function ValueParameterIntervalHD(props: IValueParameterProps) {
         options={availableIntervalsHD}
         optionLabel="name"
         optionValue="code"
-        className="w-full md:w-14rem"
+        className="w-full"
       />
     </div>
   );

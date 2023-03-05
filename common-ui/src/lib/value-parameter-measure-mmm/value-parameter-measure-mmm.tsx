@@ -28,7 +28,7 @@ export function ValueParameterMeasureMMM(props: IValueParameterProps) {
         options={availableMeasuresMMM}
         optionLabel="name"
         optionValue="code"
-        className="w-full md:w-14rem"
+        className="w-full"
       />
     </div>
   );
