@@ -1,11 +1,8 @@
 import styles from './display-graph.module.css';
 import { Card } from 'primereact/card';
-import {
-  IMeteomaticsAPIDateValue,
-} from '@fedevela-vntr-case/api';
 import DisplayGraphTypeHeatmap from '../display-graph-type-heatmap/display-graph-type-heatmap';
 import DisplayGraphTypeChartJS from '../display-graph-type-chart-js/display-graph-type-chart-js';
-import { IGraphDataPoint } from '../common-ui';
+import { IMeteomaticsAPIDateValue, IGraphDataPoint } from '../common-ui';
 
 export interface DisplayGraphProps {
   graphPlotType: string;

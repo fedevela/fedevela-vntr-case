@@ -20,8 +20,10 @@ export function ChooseGraphPlotType(props: ChooseGraphPlotTypeProps) {
   ];
 
   useEffect(() => {
-    setGraphPlotType(valueGraphPlotType);
-    setShouldDisableGraphButton(false);
+    if (valueGraphPlotType.length > 0) {
+      setGraphPlotType(valueGraphPlotType);
+      setShouldDisableGraphButton(false);
+    }
   }, [valueGraphPlotType, setGraphPlotType, setShouldDisableGraphButton]);
 
   const itemTemplateWithIcon = (option: IListBoxItem) => {

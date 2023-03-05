@@ -37,7 +37,7 @@ export function ChooseLocation(props: ChooseLocationProps) {
       const place = await autoCompleteRef.current.getPlace();
       setLatitude(place.geometry.location.lat());
       setLongitude(place.geometry.location.lng());
-      const addressComponents = place.address_components.map(
+      const addressComponents: IKeyValueMap[] = place.address_components.map(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (ac: { types: any[]; long_name: any }) => {
           const addressComponent: IKeyValueMap = {};
@@ -45,6 +45,7 @@ export function ChooseLocation(props: ChooseLocationProps) {
           return addressComponent;
         }
       );
+      addressComponents.unshift({ name: place.name });
       onChangeAddressComponents(addressComponents);
       setShouldDisableNextButton(false);
       toast.current.show({

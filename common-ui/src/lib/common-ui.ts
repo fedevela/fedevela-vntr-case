@@ -8,6 +8,11 @@ export interface IListBoxItem {
   icon?: string;
 }
 
+export interface IMeteomaticsAPIDateValue {
+  date: string;
+  value: number;
+}
+
 export interface IGraphDataPoint {
   year: number;
   month: number;

@@ -6,10 +6,14 @@ import 'primeflex/primeflex.css';
 
 import { Toast } from 'primereact/toast';
 import {
-  exampleMeteomaticsAPI,
-  IMeteomaticsAPIDateValue,
+  buildMeteomaticsURL,
+  executeRequestMeteomaticsAPI,
+  INTERVAL_1H,
+  INTERVAL_P_1H,
+  INTERVAL_P_24H,
 } from '@fedevela-vntr-case/api';
 import {
+  IMeteomaticsAPIDateValue,
   IKeyValueMap,
   DisplayGraph,
   MenuSteps,
@@ -22,7 +26,7 @@ export function App() {
   const [shouldDisplayGraph, setShouldDisplayGraph] = useState(false);
   const [shouldRefreshGraph, setShouldRefreshGraph] = useState(false);
   const [weatherParameterLabel, setWeatherParameterLabel] = useState('');
-  const [graphIntervalType, setGraphIntervalType] = useState('1h');
+  const [graphIntervalType, setGraphIntervalType] = useState('');
   const [graphPlotType, setGraphPlotType] = useState('');
   const [startDate, setStartDate] = useState(DATE_ZERO);
   const [endDate, setEndDate] = useState(DATE_ZERO);
@@ -42,13 +46,46 @@ export function App() {
 
   useEffect(() => {
     if (shouldRefreshGraph) {
-      const resultMeteomaticsAPIRaw = exampleMeteomaticsAPI();
-      setMeteomaticsAPIDateValues(
-        resultMeteomaticsAPIRaw.data[0].coordinates[0].dates
+      const meteomaticsURL = buildMeteomaticsURL(
+        startDate.toISOString(),
+        endDate.toISOString(),
+        graphIntervalType === INTERVAL_1H ? INTERVAL_P_1H : INTERVAL_P_24H,
+        'x' + weatherParameterStringValue,
+        latitude.toLocaleString('en-US', { maximumFractionDigits: 5 }),
+        longitude.toLocaleString('en-US', { maximumFractionDigits: 5 })
       );
-      setShouldRefreshGraph(false);
+      executeRequestMeteomaticsAPI(meteomaticsURL)
+        .then(function (resultMeteomaticsAPIRaw) {
+          // handle success
+          console.log(resultMeteomaticsAPIRaw);
+          debugger;
+          setMeteomaticsAPIDateValues(
+            resultMeteomaticsAPIRaw.data[0].coordinates[0].dates
+          );
+        })
+        .catch(function (error) {
+          // handle error
+          console.error(error);
+          toast.current.show({
+            severity: 'error',
+            summary: 'Error: ' + error.code,
+            detail: error.message,
+            life: 3000
+          });
+          setShouldDisplayGraph(false);
+        })
+        .finally(() => setShouldRefreshGraph(false));
     }
-  }, [shouldRefreshGraph, setShouldRefreshGraph]);
+  }, [
+    endDate,
+    graphIntervalType,
+    latitude,
+    longitude,
+    startDate,
+    weatherParameterStringValue,
+    shouldRefreshGraph,
+    setShouldRefreshGraph,
+  ]);
 
   return (
     <>

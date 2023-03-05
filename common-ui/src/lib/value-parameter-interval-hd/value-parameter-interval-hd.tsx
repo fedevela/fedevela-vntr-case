@@ -3,14 +3,15 @@ import styles from './value-parameter-interval-hd.module.css';
 import { useEffect, useState } from 'react';
 import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 import { IListBoxItem, IValueParameterProps } from '../common-ui';
+import { INTERVAL_1H, INTERVAL_24H } from '@fedevela-vntr-case/api';
 
 export function ValueParameterIntervalHD(props: IValueParameterProps) {
   const { setValueParameter } = props;
   const [valueIntervalHD, setValueIntervalHD] = useState<string>('');
 
   const availableIntervalsHD: IListBoxItem[] = [
-    { name: 'Hourly', code: '1h' },
-    { name: 'Daily', code: '24h' },
+    { name: 'Hourly', code: INTERVAL_1H },
+    { name: 'Daily', code: INTERVAL_24H },
   ];
 
   useEffect(() => {

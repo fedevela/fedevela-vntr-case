@@ -1,7 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import styles from './menu-steps.module.css';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { Steps } from 'primereact/steps';
 import { MenuItem } from 'primereact/menuitem';
@@ -82,12 +82,16 @@ export function MenuSteps(props: MenuStepsProps) {
       disabled: activeIndex < 3,
     },
   ];
+
   return (
     <div className={styles['container']}>
       <Steps
         model={items}
         activeIndex={activeIndex}
-        onSelect={(e) => setActiveIndex(e.index)}
+        onSelect={(e) => {
+          setActiveIndex(e.index);
+          setShouldDisableGraphButton(true);
+        }}
         readOnly={false}
       />
       <Divider />
