@@ -50,7 +50,7 @@ export function App() {
         startDate.toISOString(),
         endDate.toISOString(),
         graphIntervalType === INTERVAL_1H ? INTERVAL_P_1H : INTERVAL_P_24H,
-        'x' + weatherParameterStringValue,
+        weatherParameterStringValue,
         latitude.toLocaleString('en-US', { maximumFractionDigits: 5 }),
         longitude.toLocaleString('en-US', { maximumFractionDigits: 5 })
       );
