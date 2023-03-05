@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { Card } from 'primereact/card';
 import { Divider } from 'primereact/divider';
 
+import { buildWeatherParameterStringTemperature } from '@fedevela-vntr-case/api';
+
 import ValueParameterLevelMeters from '../value-parameter-level-meters/value-parameter-level-meters';
 import ValueParameterMeasureMMM from '../value-parameter-measure-mmm/value-parameter-measure-mmm';
 import ValueParameterIntervalHD from '../value-parameter-interval-hd/value-parameter-interval-hd';
@@ -37,18 +39,23 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
   }, [setWeatherParameterStringValue, parameterStringValueTemperature]);
 
   useEffect(() => {
-    setParameterStringValueTemperature(
-      `t_${measureMMMVP}_${levelMetersVP}_${intervalHDVP}:${unitTemperatureVP}`
-    );
     if (
       levelMetersVP !== '' &&
       measureMMMVP !== '' &&
       intervalHDVP !== '' &&
       unitTemperatureVP !== ''
     ) {
+      setParameterStringValueTemperature(
+        buildWeatherParameterStringTemperature(
+          measureMMMVP,
+          levelMetersVP,
+          intervalHDVP,
+          unitTemperatureVP
+        )
+      );
       setShouldDisableNextButton(false);
       toast.current.show({
-        severity: 'info',
+        severity: 'success',
         summary: 'Weather Parameter Configured!',
         detail: 'The temperature parameter has been configured.',
       });
@@ -60,6 +67,7 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
     measureMMMVP,
     intervalHDVP,
     unitTemperatureVP,
+    toast,
   ]);
 
   useEffect(() => {

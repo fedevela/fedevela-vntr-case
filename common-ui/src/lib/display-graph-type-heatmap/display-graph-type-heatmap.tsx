@@ -11,8 +11,6 @@ export interface DisplayGraphTypeHeatmapProps {
 export function DisplayGraphTypeHeatmap(props: DisplayGraphTypeHeatmapProps) {
   const { graphDataPoints } = props;
 
-  console.log(graphDataPoints);
-
   const xLabels = createArray24HLabels();
   const yLabels = [...new Set(graphDataPoints.map((gdp) => gdp.ymdLabel))];
   const plotData = new Array(yLabels.length)

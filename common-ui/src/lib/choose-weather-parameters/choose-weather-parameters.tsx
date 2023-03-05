@@ -41,7 +41,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
           setActiveTabIndex(e.index);
           setWeatherParameterLabel(weatherParameterLabels[e.index]);
           toast.current.show({
-            severity: 'info',
+            severity: 'success',
             summary: 'Weather Parameter Chosen!',
             detail: weatherParameterLabels[e.index],
           });

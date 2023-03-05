@@ -17,6 +17,13 @@ const axiosInstance = axios.create({
   responseType: 'json',
 });
 
+export const buildWeatherParameterStringTemperature = (
+  measureMMMVP: string,
+  levelMetersVP: string,
+  intervalHDVP: string,
+  unitTemperatureVP: string
+) => `t_${measureMMMVP}_${levelMetersVP}m_${intervalHDVP}:${unitTemperatureVP}`;
+
 export const exampleMeteomaticsAPI = () => mockMeteomaticsData;
 
 export const buildMeteomaticsURL = (
@@ -29,5 +36,5 @@ export const buildMeteomaticsURL = (
 ) =>
   `${startTime}--${endTime}:${dateInterval}/${weatherParameter}/${latitude},${longitude}/json?model=mix`;
 
-export const executeRequestMeteomaticsAPI = async (meteomaticsURL: string) => 
+export const executeRequestMeteomaticsAPI = async (meteomaticsURL: string) =>
   Promise.resolve(axiosInstance.post(meteomaticsURL));

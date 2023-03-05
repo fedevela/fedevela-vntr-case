@@ -54,23 +54,21 @@ export function App() {
         latitude.toLocaleString('en-US', { maximumFractionDigits: 5 }),
         longitude.toLocaleString('en-US', { maximumFractionDigits: 5 })
       );
+
       executeRequestMeteomaticsAPI(meteomaticsURL)
         .then(function (resultMeteomaticsAPIRaw) {
-          // handle success
           console.log(resultMeteomaticsAPIRaw);
-          debugger;
           setMeteomaticsAPIDateValues(
-            resultMeteomaticsAPIRaw.data[0].coordinates[0].dates
+            resultMeteomaticsAPIRaw.data.data[0].coordinates[0].dates
           );
         })
         .catch(function (error) {
-          // handle error
-          console.error(error);
+          console.error(error.response);
           toast.current.show({
             severity: 'error',
             summary: 'Error: ' + error.code,
-            detail: error.message,
-            life: 3000
+            detail: error.response.data.message,
+            life: 3000,
           });
           setShouldDisplayGraph(false);
         })
@@ -89,7 +87,7 @@ export function App() {
 
   return (
     <>
-      <Toast ref={toast} />
+      <Toast ref={toast} position="bottom-right" />
       <MenuSteps
         setLatitude={setLatitude}
         setLongitude={setLongitude}
@@ -109,13 +107,10 @@ export function App() {
         setShouldRefreshGraph={setShouldRefreshGraph}
       />
       {shouldDisplayGraph && (
-        <>
-          <p className="m-0">{weatherParameterStringValue}</p>
-          <DisplayGraph
-            meteomaticsAPIDateValues={meteomaticsAPIDateValues}
-            graphPlotType={graphPlotType}
-          />
-        </>
+        <DisplayGraph
+          meteomaticsAPIDateValues={meteomaticsAPIDateValues}
+          graphPlotType={graphPlotType}
+        />
       )}
     </>
   );

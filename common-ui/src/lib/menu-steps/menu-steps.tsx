@@ -149,15 +149,6 @@ export function MenuSteps(props: MenuStepsProps) {
         <div className="formgrid grid">
           <div className="field col">
             <div className="card flex justify-content-center">
-              {false && activeIndex > 0 && (
-                <Button
-                  label="Previous"
-                  icon="pi pi-backward"
-                  iconPos="left"
-                  severity="info"
-                  onClick={() => setActiveIndex(activeIndex - 1)}
-                />
-              )}
             </div>
           </div>
           <div className="field col">
@@ -185,6 +176,7 @@ export function MenuSteps(props: MenuStepsProps) {
                   onClick={() => {
                     setShouldDisplayGraph(true);
                     setShouldRefreshGraph(true);
+                    setShouldDisableGraphButton(true);
                   }}
                 />
               )}

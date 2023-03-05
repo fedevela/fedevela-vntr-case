@@ -42,7 +42,7 @@ export function ChooseDateTimeRange(props: ChooseDateTimeRangeProps) {
     setEndDate(aEndDate);
     setShouldDisableNextButton(false);
     toast.current.show({
-      severity: 'info',
+      severity: 'success',
       summary: 'Date range chosen!',
       detail: `${startDate.toUTCString()} - ${endDate.toUTCString()}`,
     });

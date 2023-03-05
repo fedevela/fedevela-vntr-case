@@ -49,7 +49,7 @@ export function ChooseLocation(props: ChooseLocationProps) {
       onChangeAddressComponents(addressComponents);
       setShouldDisableNextButton(false);
       toast.current.show({
-        severity: 'info',
+        severity: 'success',
         summary: 'Location chosen!',
         detail: `Latitude: ${place.geometry.location.lat()} - Longitude: ${place.geometry.location.lng()}`,
       });
