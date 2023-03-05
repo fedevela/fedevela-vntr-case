@@ -57,7 +57,6 @@ export function App() {
 
       executeRequestMeteomaticsAPI(meteomaticsURL)
         .then(function (resultMeteomaticsAPIRaw) {
-          console.log(resultMeteomaticsAPIRaw);
           setMeteomaticsAPIDateValues(
             resultMeteomaticsAPIRaw.data.data[0].coordinates[0].dates
           );
