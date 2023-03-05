@@ -7,7 +7,6 @@ export const INTERVAL_P_1H = 'PT1H';
 export const INTERVAL_P_24H = 'P1D';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://corsproxy.io/?',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Access-Control-Allow-Credentials': false,
@@ -37,7 +36,7 @@ export const buildMeteomaticsURL = (
   latitude: string,
   longitude: string
 ) =>
-  `https://api.meteomatics.com/${startTime}--${endTime}:${dateInterval}/${weatherParameter}/${latitude},${longitude}/json?model=mix`;
+  `https://corsproxy.io/?https://api.meteomatics.com/${startTime}--${endTime}:${dateInterval}/${weatherParameter}/${latitude},${longitude}/json?model=mix`;
 
 export const executeRequestMeteomaticsAPI = async (meteomaticsURL: string) =>
   Promise.resolve(axiosInstance.post(meteomaticsURL));
