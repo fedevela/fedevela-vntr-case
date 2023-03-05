@@ -87,7 +87,7 @@ export function App() {
 
   return (
     <>
-      <Toast ref={toast} position="bottom-right" />
+      <Toast ref={toast} position="bottom-left" />
       <MenuSteps
         setLatitude={setLatitude}
         setLongitude={setLongitude}
