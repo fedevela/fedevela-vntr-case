@@ -14,6 +14,18 @@ const axiosInstance = axios.create({
   responseType: 'json',
 });
 
+export const executeRequestMeteomaticsAPI = async (meteomaticsURL: string) =>
+  Promise.resolve(axiosInstance.post(meteomaticsURL));
+
+export const buildMeteomaticsURL = (
+  startTime: string,
+  endTime: string,
+  weatherParameter: string,
+  latitude: string,
+  longitude: string
+) =>
+  `https://corsproxy.io/?https://api.meteomatics.com/${startTime}--${endTime}:${INTERVAL_P_1H}/${weatherParameter}/${latitude},${longitude}/json?model=mix`;
+
 export const buildWeatherParameterStringTemperature = (
   measureMMMVP: string,
   levelMetersVP: string,
@@ -29,15 +41,3 @@ export const buildWeatherParameterStringRelativeHumidity = (
   measureMMMVP: string,
   levelMetersVP: string
 ) => `relative_humidity_${measureMMMVP}_${levelMetersVP}m_${INTERVAL_1H}:p`;
-
-export const buildMeteomaticsURL = (
-  startTime: string,
-  endTime: string,
-  weatherParameter: string,
-  latitude: string,
-  longitude: string
-) =>
-  `https://corsproxy.io/?https://api.meteomatics.com/${startTime}--${endTime}:${INTERVAL_P_1H}/${weatherParameter}/${latitude},${longitude}/json?model=mix`;
-
-export const executeRequestMeteomaticsAPI = async (meteomaticsURL: string) =>
-  Promise.resolve(axiosInstance.post(meteomaticsURL));
