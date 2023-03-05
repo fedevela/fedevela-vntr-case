@@ -17,6 +17,7 @@ export interface ChooseWeatherParametersProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
   setWeatherParameterCode: (git: string) => void;
+  setWeatherParameteUnits: (wpu: string) => void;
   weatherParameterCode: string;
   shouldDisableNextButton: boolean;
   toast: any;
@@ -27,6 +28,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
     setWeatherParameterCode,
+    setWeatherParameteUnits,
     weatherParameterCode,
     shouldDisableNextButton,
     toast,
@@ -66,6 +68,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
                   setWeatherParameterStringValue={
                     setWeatherParameterStringValue
                   }
+                  setWeatherParameteUnits={setWeatherParameteUnits}
                   setShouldDisableNextButton={setShouldDisableNextButton}
                   shouldDisableNextButton={shouldDisableNextButton}
                   toast={toast}
@@ -80,6 +83,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
                   setWeatherParameterStringValue={
                     setWeatherParameterStringValue
                   }
+                  setWeatherParameteUnits={setWeatherParameteUnits}
                   setShouldDisableNextButton={setShouldDisableNextButton}
                   shouldDisableNextButton={shouldDisableNextButton}
                   toast={toast}
@@ -94,6 +98,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
                   setWeatherParameterStringValue={
                     setWeatherParameterStringValue
                   }
+                  setWeatherParameteUnits={setWeatherParameteUnits}
                   setShouldDisableNextButton={setShouldDisableNextButton}
                   shouldDisableNextButton={shouldDisableNextButton}
                   toast={toast}

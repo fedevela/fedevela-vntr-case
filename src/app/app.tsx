@@ -23,6 +23,7 @@ export function App() {
   const [shouldDisplayGraph, setShouldDisplayGraph] = useState(false);
   const [shouldRefreshGraph, setShouldRefreshGraph] = useState(false);
   const [weatherParameterCode, setWeatherParameterCode] = useState('');
+  const [weatherParameterUnits, setWeatherParameteUnits] = useState('');
   const [graphPlotType, setGraphPlotType] = useState('');
   const [startDate, setStartDate] = useState(DATE_ZERO);
   const [endDate, setEndDate] = useState(DATE_ZERO);
@@ -100,6 +101,7 @@ export function App() {
         endDate={endDate}
         setWeatherParameterStringValue={setWeatherParameterStringValue}
         setGraphPlotType={setGraphPlotType}
+        setWeatherParameteUnits={setWeatherParameteUnits}
         setWeatherParameterCode={setWeatherParameterCode}
         weatherParameterCode={weatherParameterCode}
         setShouldDisplayGraph={setShouldDisplayGraph}
@@ -109,6 +111,7 @@ export function App() {
         <DisplayGraph
           meteomaticsAPIDateValues={meteomaticsAPIDateValues}
           weatherParameterCode={weatherParameterCode}
+          weatherParameterUnits={weatherParameterUnits}
           locationName={Object.values(addressComponents[0])[0]}
           graphPlotType={graphPlotType}
         />

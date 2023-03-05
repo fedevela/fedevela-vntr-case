@@ -34,9 +34,13 @@ export function DisplayGraphTypeHeatmap(props: DisplayGraphTypeHeatmapProps) {
           xLabels={xLabels}
           yLabels={yLabels}
           // Render cell with tooltip
-          cellRender={(x, y, value) => (
-            <div title={`${yLabels[y]} ${xLabels[x]} = ${value}`}>{value}</div>
-          )}
+          cellRender={(y, x, value) => {
+            return (
+              <div title={`${yLabels[y]} ${xLabels[x]} = ${value}`}>
+                {value}
+              </div>
+            );
+          }}
           xLabelsStyle={(index) => ({
             color: '#777',
             fontSize: '.8rem',

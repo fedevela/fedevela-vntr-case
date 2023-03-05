@@ -15,6 +15,7 @@ export interface ParametersTemperatureProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
   shouldDisableNextButton: boolean;
+  setWeatherParameteUnits: (wpu: string) => void;
   toast: any;
 }
 
@@ -22,6 +23,7 @@ export function ParametersTemperature(props: ParametersTemperatureProps) {
   const {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
+    setWeatherParameteUnits,
     shouldDisableNextButton,
     toast,
   } = props;
@@ -49,6 +51,7 @@ export function ParametersTemperature(props: ParametersTemperatureProps) {
           unitTemperatureVP
         )
       );
+      setWeatherParameteUnits(unitTemperatureVP);
       if (shouldDisableNextButton)
         toast.current.show({
           severity: 'success',
@@ -60,6 +63,7 @@ export function ParametersTemperature(props: ParametersTemperatureProps) {
   }, [
     setParameterStringValueTemperature,
     setShouldDisableNextButton,
+    setWeatherParameteUnits,
     shouldDisableNextButton,
     levelMetersVP,
     measureMMMVP,

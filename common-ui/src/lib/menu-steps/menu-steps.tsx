@@ -25,6 +25,7 @@ export interface MenuStepsProps {
   onChangeAddressComponents: (acs: IKeyValueMap[]) => void;
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
+  setWeatherParameteUnits: (wpu: string) => void;
   setWeatherParameterCode: (git: string) => void;
   setShouldDisplayGraph: (ssdg: boolean) => void;
   setShouldRefreshGraph: (ssrg: boolean) => void;
@@ -45,6 +46,7 @@ export function MenuSteps(props: MenuStepsProps) {
     setWeatherParameterStringValue,
     setGraphPlotType,
     setWeatherParameterCode,
+    setWeatherParameteUnits,
     setShouldDisplayGraph,
     setShouldRefreshGraph,
     weatherParameterCode,
@@ -127,6 +129,7 @@ export function MenuSteps(props: MenuStepsProps) {
                   }
                   setShouldDisableNextButton={setShouldDisableNextButton}
                   shouldDisableNextButton={shouldDisableNextButton}
+                  setWeatherParameteUnits={setWeatherParameteUnits}
                   setWeatherParameterCode={setWeatherParameterCode}
                   weatherParameterCode={weatherParameterCode}
                   toast={toast}

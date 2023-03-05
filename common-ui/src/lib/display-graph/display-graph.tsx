@@ -11,6 +11,7 @@ import {
 export interface DisplayGraphProps {
   graphPlotType: string;
   weatherParameterCode: string;
+  weatherParameterUnits: string;
   locationName: string;
   meteomaticsAPIDateValues: IMeteomaticsAPIDateValue[];
 }
@@ -20,6 +21,7 @@ export function DisplayGraph(props: DisplayGraphProps) {
     graphPlotType,
     meteomaticsAPIDateValues,
     weatherParameterCode,
+    weatherParameterUnits,
     locationName,
   } = props;
   const graphDataPoints: IGraphDataPoint[] = meteomaticsAPIDateValues.map(
@@ -43,7 +45,7 @@ export function DisplayGraph(props: DisplayGraphProps) {
     <div className={styles['container']}>
       <Card>
         <h3>
-          {weatherParametersKV[weatherParameterCode].name} at {locationName}
+          {weatherParametersKV[weatherParameterCode].name} ({weatherParameterUnits}) at {locationName}
         </h3>
         {(() => {
           switch (graphPlotType) {

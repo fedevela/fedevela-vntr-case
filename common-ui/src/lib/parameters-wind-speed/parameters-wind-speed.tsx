@@ -11,6 +11,7 @@ export interface ParametersWindSpeedProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
   shouldDisableNextButton: boolean;
+  setWeatherParameteUnits: (wpu: string) => void;
   toast: any;
 }
 
@@ -18,6 +19,7 @@ export function ParametersWindSpeed(props: ParametersWindSpeedProps) {
   const {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
+    setWeatherParameteUnits,
     shouldDisableNextButton,
     toast,
   } = props;
@@ -35,6 +37,7 @@ export function ParametersWindSpeed(props: ParametersWindSpeedProps) {
       setParameterStringValueSpeed(
         buildWeatherParameterStringSpeed(levelMetersVP, unitSpeedVP)
       );
+      setWeatherParameteUnits(unitSpeedVP);
       if (shouldDisableNextButton)
         toast.current.show({
           severity: 'success',
@@ -46,6 +49,7 @@ export function ParametersWindSpeed(props: ParametersWindSpeedProps) {
   }, [
     setParameterStringValueSpeed,
     setShouldDisableNextButton,
+    setWeatherParameteUnits,
     shouldDisableNextButton,
     levelMetersVP,
     unitSpeedVP,

@@ -12,6 +12,7 @@ import ValueParameterMeasureMMM from '../value-parameter-measure-mmm/value-param
 export interface ParametersRelativeHumidityProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
+  setWeatherParameteUnits: (wpu: string) => void;
   shouldDisableNextButton: boolean;
   toast: any;
 }
@@ -22,6 +23,7 @@ export function ParametersRelativeHumidity(
   const {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
+    setWeatherParameteUnits,
     shouldDisableNextButton,
     toast,
   } = props;
@@ -42,6 +44,7 @@ export function ParametersRelativeHumidity(
       setParameterStringValueRelativeHumidity(
         buildWeatherParameterStringRelativeHumidity(measureMMMVP, levelMetersVP)
       );
+      setWeatherParameteUnits('%');
       if (shouldDisableNextButton)
         toast.current.show({
           severity: 'success',
@@ -53,6 +56,7 @@ export function ParametersRelativeHumidity(
   }, [
     setParameterStringValueRelativeHumidity,
     setShouldDisableNextButton,
+    setWeatherParameteUnits,
     shouldDisableNextButton,
     levelMetersVP,
     measureMMMVP,
