@@ -14,6 +14,7 @@ import ValueParameterUnitTemperature from '../value-parameter-unit-temperature/v
 export interface TemperatureParametersProps {
   setWeatherParameterStringValue: (psv: string) => void;
   setShouldDisableNextButton: (sdnb: boolean) => void;
+  shouldDisableNextButton: boolean;
   toast: any;
 }
 
@@ -21,11 +22,12 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
   const {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
+    shouldDisableNextButton,
     toast,
   } = props;
   const [parameterStringValueTemperature, setParameterStringValueTemperature] =
     useState<string>('');
-  //"t_min_2m_1h:C"
+
   const [levelMetersVP, setLevelMetersVP] = useState<string>('');
   const [measureMMMVP, setMeasureMMMVP] = useState<string>('');
   const [unitTemperatureVP, setUnitTemperatureVP] = useState<string>('');
@@ -47,12 +49,13 @@ export function TemperatureParameters(props: TemperatureParametersProps) {
           unitTemperatureVP
         )
       );
+      if (shouldDisableNextButton)
+        toast.current.show({
+          severity: 'success',
+          summary: 'Weather Parameter Configured!',
+          detail: 'The temperature parameter has been configured.',
+        });
       setShouldDisableNextButton(false);
-      toast.current.show({
-        severity: 'success',
-        summary: 'Weather Parameter Configured!',
-        detail: 'The temperature parameter has been configured.',
-      });
     }
   }, [
     setParameterStringValueTemperature,

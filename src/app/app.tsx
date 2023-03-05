@@ -55,6 +55,13 @@ export function App() {
           setMeteomaticsAPIDateValues(
             resultMeteomaticsAPIRaw.data.data[0].coordinates[0].dates
           );
+
+          toast.current.show({
+            severity: 'success',
+            summary: 'Meteomatics Query Successful',
+            detail: `Fetched ${resultMeteomaticsAPIRaw.data.data[0].coordinates[0].dates.length} points of data.`,
+            life: 3000,
+          });
         })
         .catch(function (error) {
           console.error(error.response);

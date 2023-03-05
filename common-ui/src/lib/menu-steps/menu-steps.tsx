@@ -125,6 +125,7 @@ export function MenuSteps(props: MenuStepsProps) {
                     setWeatherParameterStringValue
                   }
                   setShouldDisableNextButton={setShouldDisableNextButton}
+                  shouldDisableNextButton={shouldDisableNextButton}
                   weatherParameterLabel={weatherParameterLabel}
                   setWeatherParameterLabel={setWeatherParameterLabel}
                   toast={toast}

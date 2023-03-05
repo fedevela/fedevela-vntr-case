@@ -10,6 +10,7 @@ export interface ChooseWeatherParametersProps {
   setShouldDisableNextButton: (sdnb: boolean) => void;
   setWeatherParameterLabel: (git: string) => void;
   weatherParameterLabel: string;
+  shouldDisableNextButton: boolean;
   toast: any;
 }
 
@@ -18,6 +19,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
     setWeatherParameterStringValue,
     setShouldDisableNextButton,
     setWeatherParameterLabel,
+    shouldDisableNextButton,
     weatherParameterLabel,
     toast,
   } = props;
@@ -49,6 +51,7 @@ export function ChooseWeatherParameters(props: ChooseWeatherParametersProps) {
           <TemperatureParameters
             setWeatherParameterStringValue={setWeatherParameterStringValue}
             setShouldDisableNextButton={setShouldDisableNextButton}
+            shouldDisableNextButton={shouldDisableNextButton}
             toast={toast}
           />
         </AccordionTab>
