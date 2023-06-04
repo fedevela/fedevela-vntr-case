@@ -8,8 +8,8 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
   auth: {
-    username: 'dramaclub_club',
-    password: 'D62iaWOz0y',
+    username: 'dramaclub_estefenn',
+    password: '9bTiH87Ztb',
   },
   responseType: 'json',
 });
